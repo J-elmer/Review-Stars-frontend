@@ -1,6 +1,7 @@
 .brand-logo {
-  height: 100%;
+  height: 90%;
   width: auto;
+  margin-top: 0.25rem;
 }
 
 .nav-wrapper {
