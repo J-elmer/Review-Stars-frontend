@@ -12,7 +12,7 @@ export class ConcertService {
   private concertUrl = 'http://localhost:9090/concert/';
 
   httpOptions = {
-    headers: new HttpHeaders({'Content=Type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(

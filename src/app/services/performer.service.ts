@@ -12,7 +12,7 @@ export class PerformerService {
   private performerUrl = 'http://localhost:6060/performer/'
 
   httpOptions = {
-    headers: new HttpHeaders({'Content=Type': 'application/json'})
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(
