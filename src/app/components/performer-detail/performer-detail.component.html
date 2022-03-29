@@ -1,0 +1,18 @@
+<mat-accordion class="headers-align">
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span>Name: {{performer.name}}</span>
+    </mat-panel-title>
+    <mat-panel-description>
+      Style: {{performer.style}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <p>Age: {{performer.age}}</p>
+  <app-button text="Show Reviews" color="black" (btnClick)="showReviews()"></app-button>
+  <app-button text="Show Concerts" color="black" (btnClick)="showConcerts()"></app-button>
+  <app-button *ngIf="hasRoute('/admin')" text="Add Performer" color="green" (btnClick)="addPerformer()"></app-button>
+  <app-button *ngIf="hasRoute('/admin')" text="Update Performer" color="green" (btnClick)="updatePerformer()"></app-button>
+  <i *ngIf="hasRoute('/admin')" (click)="deletePerformer()" class="material-icons">delete</i>
+</mat-expansion-panel>
+</mat-accordion>

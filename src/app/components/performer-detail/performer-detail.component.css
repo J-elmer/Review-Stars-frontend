@@ -1,0 +1,14 @@
+span {
+  font-weight: bold;
+}
+
+i {
+  color: red;
+  cursor: pointer;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
