@@ -23,4 +23,9 @@ export class PerformerListComponent implements OnInit {
     this.performerService.getPerformers().subscribe(performers => this.performers = performers);
   }
 
+  deletePerformer(performer: Performer) {
+    this.performerService.deletePerformer(performer.id)
+      .subscribe(() => this.performers = this.performers.filter(p => p.id !== performer.id));
+  }
+
 }

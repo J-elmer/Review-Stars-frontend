@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PerformerDetailComponent } from './components/performer-detail/performer-detail.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { PerformerFormComponent } from './components/PefromerFormComponent/performer-form.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {MatExpansionModule} from "@angular/material/expansion";
     ButtonComponent,
     NavbarComponent,
     NotFoundComponent,
-    PerformerDetailComponent
+    PerformerDetailComponent,
+    AdminPageComponent,
+    PerformerFormComponent
   ],
     imports: [
         BrowserModule,

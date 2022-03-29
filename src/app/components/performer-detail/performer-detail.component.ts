@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { Router} from "@angular/router";
 
 import { Performer } from "../../model/Performer";
@@ -10,9 +10,10 @@ import { Performer } from "../../model/Performer";
 })
 export class PerformerDetailComponent implements OnInit {
   @Input() performer!: Performer;
+  @Output() btnClicked = new EventEmitter();
 
   constructor(
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -26,16 +27,8 @@ export class PerformerDetailComponent implements OnInit {
     console.log("concerts");
   }
 
-  updatePerformer() {
-    console.log("update performer");
-  }
-
-  deletePerformer() {
-    console.log("delete performer");
-  }
-
-  addPerformer() {
-    console.log("add performer");
+  deletePerformer(performerId: number) {
+    this.btnClicked.emit(performerId);
   }
 
   hasRoute(route: string) {

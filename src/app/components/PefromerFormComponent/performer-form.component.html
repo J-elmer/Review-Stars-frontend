@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="section">
+    <h1 *ngIf="!update">New Performer</h1>
+    <div class="form-control">
+      <label for="name">Name</label>
+      <input type="text" name="name" [(ngModel)]="name" id="name" placeholder="What is the performers name?"/>
+    </div>
+    <div class="form-control">
+      <label for="age">Age</label>
+      <input type="number" name="age" [(ngModel)]="age" id="age" placeholder="What age is the performer?"/>
+    </div>
+    <div class="form-control">
+      <label for="style">Style</label>
+      <input type="text" name="style" [(ngModel)]="style" id="style" placeholder="What is the style of the music?"/>
+    </div>
+    <app-button text="Save Performer" color="green" (btnClick)="onSubmit()"></app-button>
+    <app-button text="Reset form" color="black" (btnClick)="resetForm()"></app-button>
+  </div>
+
+</div>
+<p *ngIf="update">Update Performer</p>
