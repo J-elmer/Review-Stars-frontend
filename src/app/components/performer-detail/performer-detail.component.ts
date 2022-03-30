@@ -2,6 +2,8 @@ import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { Router} from "@angular/router";
 
 import { Performer } from "../../model/Performer";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-performer-detail',
@@ -18,6 +20,7 @@ export class PerformerDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +45,17 @@ export class PerformerDetailComponent implements OnInit {
   }
 
   deletePerformer(performerId: number) {
-    this.deleteClicked.emit(performerId);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+        title: 'Confirm',
+        content: 'Are you sure you want to delete this performer?',
+        cancelOption: 'No',
+        confirmOption: 'Yes'
+      }} );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.deleteClicked.emit(performerId);
+      }
+    });
   }
 
   discardForm() {

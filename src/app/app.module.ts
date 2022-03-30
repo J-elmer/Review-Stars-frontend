@@ -13,6 +13,9 @@ import { PerformerDetailComponent } from './components/performer-detail/performe
 import {MatExpansionModule} from "@angular/material/expansion";
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { PerformerFormComponent } from './components/PefromerFormComponent/performer-form.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -23,16 +26,19 @@ import { PerformerFormComponent } from './components/PefromerFormComponent/perfo
     NotFoundComponent,
     PerformerDetailComponent,
     AdminPageComponent,
-    PerformerFormComponent
+    PerformerFormComponent,
+    ConfirmationDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        MatExpansionModule,
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
 
 import { Performer } from "../../model/Performer";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'performer-form-component',
@@ -19,6 +21,7 @@ export class PerformerFormComponent implements OnInit {
   style?: string;
 
   constructor(
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +31,20 @@ export class PerformerFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+      title: 'Confirm',
+      content: 'Are you sure you want to save this performer?',
+      cancelOption: 'No',
+      confirmOption: 'Yes'
+    }} );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.submitForm();
+      }
+    });
+  }
+
+  submitForm() {
     let newPerformer: Performer;
     if (!this.update) {
       newPerformer = {
@@ -43,12 +59,32 @@ export class PerformerFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.name = "";
-    this.age = undefined;
-    this.style = "";
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+        title: 'Confirm',
+        content: 'Are you sure you want to reset these fields?',
+        cancelOption: 'No',
+        confirmOption: 'Yes'
+      }});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.name = "";
+        this.age = undefined;
+        this.style = "";
+      }
+    });
   }
 
   discardForm() {
-    this.discardClicked.emit();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+        title: 'Confirm',
+        content: 'Are you sure you want to discard these changes?',
+        cancelOption: 'No',
+        confirmOption: 'Yes'
+      }});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.discardClicked.emit();
+      }
+    });
   }
 }
