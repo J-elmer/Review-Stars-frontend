@@ -33,7 +33,7 @@ export class PerformerDetailComponent implements OnInit {
 
 
   updatePerformer() {
-    this.updateClicked = true;
+    this.updateClicked = !this.updateClicked;
   }
 
   saveUpdatedPerformer(updatedPerformer: Performer) {

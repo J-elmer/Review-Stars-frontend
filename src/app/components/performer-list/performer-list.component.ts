@@ -30,7 +30,7 @@ export class PerformerListComponent implements OnInit {
   }
 
   addPerformer() {
-    this.addClicked = true;
+    this.addClicked = !this.addClicked;
   }
 
   discardForm() {
