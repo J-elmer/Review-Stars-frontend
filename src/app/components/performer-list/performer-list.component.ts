@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+// @ts-ignore
+import * as M from 'materialize-css/dist/js/materialize';
 
 import { Performer } from "../../model/Performer";
 import { PerformerService} from "../../services/performer.service";
@@ -39,17 +41,36 @@ export class PerformerListComponent implements OnInit {
 
 
   savePerformer(newPerformer: Performer) {
-    console.log(newPerformer);
-    this.performerService.createPerformer(newPerformer).subscribe(() => this.performers.push(newPerformer));
+    this.performerService.createPerformer(newPerformer).subscribe((response) => {
+      if (!response) {
+        this.performers.push(newPerformer);
+        M.toast({html: `Performer ${newPerformer.name} saved`, classes: 'rounded green'})
+      }
+      // TODO generate component to show errors
+    });
   }
 
   updatePerformer(updatedPerformer: Performer) {
-    this.performerService.updatePerformer(updatedPerformer).subscribe();
+    this.performerService.updatePerformer(updatedPerformer).subscribe((response) => {
+      if (!response) {
+        M.toast({html: `Performer ${updatedPerformer.name} updated`, classes: 'rounded green'})
+        return;
+      }
+      console.log(response);
+    });
   }
 
   deletePerformer(performerId: number) {
     this.performerService.deletePerformer(performerId)
-      .subscribe(() => this.performers = this.performers.filter(p => p.id !== performerId));
+      .subscribe((response) => {
+        if (!response) {
+          let performer = this.performers.find(p => p.id == performerId);
+          if (performer) {
+            M.toast({html: `Performer ${performer.name} deleted`, classes: 'rounded red'})
+          }
+          this.performers = this.performers.filter(p => p.id !== performerId);
+        }
+      });
   }
 
   hasRoute(route: string) {

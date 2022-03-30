@@ -43,14 +43,14 @@ export class PerformerService {
   createPerformer(performer: Performer): Observable<any> {
     const url = `${this.performerUrl}new`;
     return this.http.post<Performer>(url, performer, this.httpOptions).pipe(
-      catchError(this.handleError<Performer>('createPerformer'))
+      catchError(this.handleError<any>())
     );
   }
 
   updatePerformer(performer: Performer): Observable<any> {
     const url = `${this.performerUrl}update`;
     return this.http.put(url, performer, this.httpOptions).pipe(
-      catchError(this.handleError<any>('updatePerformer'))
+      catchError(this.handleError<any>())
     );
   }
 
@@ -70,8 +70,8 @@ export class PerformerService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
+      let errorResponse = error.error;
+      return of(errorResponse as T);
     }
   }
 }
