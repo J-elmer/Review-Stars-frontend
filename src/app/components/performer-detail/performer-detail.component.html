@@ -11,9 +11,20 @@
     <p>Age: {{performer.age}}</p>
     <app-button text="Show Reviews" color="black" (btnClick)="showReviews()"></app-button>
     <app-button text="Show Concerts" color="black" (btnClick)="showConcerts()"></app-button>
-    <app-button *ngIf="hasRoute('/admin')" text="Add Performer" color="green" routerLink="/newPerformer"></app-button>
+    <app-button *ngIf="hasRoute('/admin')" text="Add Performer" color="green" (btnClick)="addPerformer()"></app-button>
     <app-button *ngIf="hasRoute('/admin')" text="Update Performer" color="green"
-                routerLink="/updatePerformer/{{performer.id}}"></app-button>
-    <i *ngIf="hasRoute('/admin')" (click)="deletePerformer(performer.id)" class="material-icons">delete</i>
+                (btnClick)="updatePerformer()"></app-button>
+    <i *ngIf="hasRoute('/admin')" (click)="deletePerformer(performer.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
+<div *ngIf="addClicked">
+  <performer-form-component
+    (submitClicked)="savePerformer(newPerformer)"
+    (discardClicked)="discardForm()"></performer-form-component>
+</div>
+<div *ngIf="updateClicked">
+  <performer-form-component
+    [performer]="performer"
+    (submitClicked)="saveUpdatedPerformer(updatedPerformer)"
+  ></performer-form-component>
+</div>

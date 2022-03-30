@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import { Performer } from "../../model/Performer";
 import { PerformerService} from "../../services/performer.service";
@@ -9,6 +9,9 @@ import { PerformerService} from "../../services/performer.service";
   styleUrls: ['./performer-list.component.css']
 })
 export class PerformerListComponent implements OnInit {
+  @Input() newPerformer!: Performer;
+  @Input() updatedPerformer!: Performer;
+
   performers: Performer[] = [];
 
   constructor(
@@ -23,9 +26,17 @@ export class PerformerListComponent implements OnInit {
     this.performerService.getPerformers().subscribe(performers => this.performers = performers);
   }
 
-  deletePerformer(performer: Performer) {
-    this.performerService.deletePerformer(performer.id)
-      .subscribe(() => this.performers = this.performers.filter(p => p.id !== performer.id));
+  savePerformer(newPerformer: Performer) {
+    this.performerService.createPerformer(newPerformer).subscribe(() => this.performers.push(newPerformer));
+  }
+
+  updatePerformer(updatedPerformer: Performer) {
+    this.performerService.updatePerformer(updatedPerformer).subscribe(() => this.performers.push(updatedPerformer));
+  }
+
+  deletePerformer(performerId: number) {
+    this.performerService.deletePerformer(performerId)
+      .subscribe(() => this.performers = this.performers.filter(p => p.id !== performerId));
   }
 
 }

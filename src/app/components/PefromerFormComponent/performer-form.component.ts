@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import { Performer } from "../../model/Performer";
 
@@ -9,32 +8,48 @@ import { Performer } from "../../model/Performer";
   styleUrls: ['./performer-form.component.css']
 })
 export class PerformerFormComponent implements OnInit {
+  @Output() submitClicked = new EventEmitter();
+  @Output() discardClicked = new EventEmitter();
+
+  @Input() performer?: Performer;
+
   update: boolean = false;
   submitted:  boolean = false;
-  performer!: Performer;
   name?: string;
   age?: number;
   style?: string;
 
   constructor(
-    private router: Router
   ) { }
 
   ngOnInit(): void {
-    if (this.router.url.includes("update")) {
+    if (this.performer) {
       this.update = true;
     }
   }
 
   onSubmit() {
     this.submitted = true;
-  }
-
-  addPerformer() {
-    console.log("OKE");
+    let newPerformer: Performer;
+    if (!this.update) {
+      newPerformer = {
+        name: this.name!,
+        age: this.age!,
+        style: this.style!
+      }
+      this.submitClicked.emit(newPerformer)
+    } else {
+      this.submitClicked.emit(this.performer);
+    }
   }
 
   resetForm() {
-    console.log("OKE");
+    this.name = "";
+    this.age = undefined;
+    this.style = "";
+  }
+
+  discardForm() {
+    this.discardClicked.emit();
   }
 }
