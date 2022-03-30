@@ -5,6 +5,8 @@ import * as M from 'materialize-css/dist/js/materialize';
 import { Performer } from "../../model/Performer";
 import { PerformerService} from "../../services/performer.service";
 import {Router} from "@angular/router";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-performer-list',
@@ -21,6 +23,7 @@ export class PerformerListComponent implements OnInit {
   constructor(
     private performerService: PerformerService,
     private router: Router,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -39,14 +42,18 @@ export class PerformerListComponent implements OnInit {
     this.addClicked = false;
   }
 
-
   savePerformer(newPerformer: Performer) {
     this.performerService.createPerformer(newPerformer).subscribe((response) => {
       if (!response) {
         this.performers.push(newPerformer);
         M.toast({html: `Performer ${newPerformer.name} saved`, classes: 'rounded green'})
+      } else {
+        this.dialog.open(ConfirmationDialogComponent, {data: {
+            title: 'Error',
+            error: response,
+            confirmOption: 'Ok'
+          }});
       }
-      // TODO generate component to show errors
     });
   }
 

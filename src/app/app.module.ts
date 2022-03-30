@@ -17,7 +17,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 
-
 @NgModule({
   declarations: [
     AppComponent,
