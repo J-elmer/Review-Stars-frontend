@@ -49,10 +49,12 @@ export class PerformerDetailComponent implements OnInit {
   }
 
   savePerformer(newPerformer: Performer) {
+    this.addClicked = false;
     this.saveNewPerformerClicked.emit(newPerformer);
   }
 
   saveUpdatedPerformer(updatedPerformer: Performer) {
+    this.updateClicked = false;
     this.updatePerformerClicked.emit(updatedPerformer)
   }
 

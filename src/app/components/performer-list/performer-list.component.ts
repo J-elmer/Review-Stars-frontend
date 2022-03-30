@@ -31,7 +31,7 @@ export class PerformerListComponent implements OnInit {
   }
 
   updatePerformer(updatedPerformer: Performer) {
-    this.performerService.updatePerformer(updatedPerformer).subscribe(() => this.performers.push(updatedPerformer));
+    this.performerService.updatePerformer(updatedPerformer).subscribe();
   }
 
   deletePerformer(performerId: number) {
