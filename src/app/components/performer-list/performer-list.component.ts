@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import { Performer } from "../../model/Performer";
 import { PerformerService} from "../../services/performer.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-performer-list',
@@ -13,9 +14,11 @@ export class PerformerListComponent implements OnInit {
   @Input() updatedPerformer!: Performer;
 
   performers: Performer[] = [];
+  addClicked: boolean = false;
 
   constructor(
-    private performerService: PerformerService
+    private performerService: PerformerService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +29,17 @@ export class PerformerListComponent implements OnInit {
     this.performerService.getPerformers().subscribe(performers => this.performers = performers);
   }
 
+  addPerformer() {
+    this.addClicked = true;
+  }
+
+  discardForm() {
+    this.addClicked = false;
+  }
+
+
   savePerformer(newPerformer: Performer) {
+    console.log(newPerformer);
     this.performerService.createPerformer(newPerformer).subscribe(() => this.performers.push(newPerformer));
   }
 
@@ -39,4 +52,7 @@ export class PerformerListComponent implements OnInit {
       .subscribe(() => this.performers = this.performers.filter(p => p.id !== performerId));
   }
 
+  hasRoute(route: string) {
+    return this.router.url === route;
+  }
 }

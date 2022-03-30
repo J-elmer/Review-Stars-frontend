@@ -1,9 +1,14 @@
 <div class="container">
   <div class="section">
   <h2>Performers</h2>
+    <app-button class="right" *ngIf="hasRoute('/admin')" text="Add Performer" color="green" (btnClick)="addPerformer()"></app-button>
+    <div *ngIf="addClicked">
+      <performer-form-component
+        (submitClicked)="savePerformer($event)"
+        (discardClicked)="discardForm()"></performer-form-component>
+    </div>
     <div class="app-performer-detail-margin" *ngFor="let performer of performers">
       <app-performer-detail
-        (saveNewPerformerClicked)="savePerformer($event)"
         (updatePerformerClicked)="updatePerformer($event)"
         (deleteClicked)="deletePerformer(performer.id!)"
         [performer]="performer"></app-performer-detail>

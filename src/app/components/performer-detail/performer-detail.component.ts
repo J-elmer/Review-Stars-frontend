@@ -10,13 +10,10 @@ import { Performer } from "../../model/Performer";
 })
 export class PerformerDetailComponent implements OnInit {
   @Input() performer!: Performer;
-  @Input() newPerformer!: Performer;
   @Input() updatedPerformer!: Performer;
   @Output() deleteClicked = new EventEmitter();
-  @Output() saveNewPerformerClicked = new EventEmitter();
   @Output() updatePerformerClicked = new EventEmitter();
 
-  addClicked: boolean = false;
   updateClicked: boolean = false;
 
   constructor(
@@ -34,23 +31,9 @@ export class PerformerDetailComponent implements OnInit {
     console.log("concerts");
   }
 
-  addPerformer() {
-    if (this.updateClicked) {
-      this.updateClicked = false;
-    }
-    this.addClicked = true;
-  }
 
   updatePerformer() {
-    if (this.addClicked) {
-      this.addClicked = false;
-    }
     this.updateClicked = true;
-  }
-
-  savePerformer(newPerformer: Performer) {
-    this.addClicked = false;
-    this.saveNewPerformerClicked.emit(newPerformer);
   }
 
   saveUpdatedPerformer(updatedPerformer: Performer) {
@@ -63,7 +46,6 @@ export class PerformerDetailComponent implements OnInit {
   }
 
   discardForm() {
-    this.addClicked = false;
     this.updateClicked = false;
   }
 
