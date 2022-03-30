@@ -3,8 +3,8 @@
   <h2>Performers</h2>
     <div class="app-performer-detail-margin" *ngFor="let performer of performers">
       <app-performer-detail
-        (saveNewPerformerClicked)="savePerformer(newPerformer)"
-        (updatePerformerClicked)="updatePerformer(updatedPerformer)"
+        (saveNewPerformerClicked)="savePerformer($event)"
+        (updatePerformerClicked)="updatePerformer($event)"
         (deleteClicked)="deletePerformer(performer.id!)"
         [performer]="performer"></app-performer-detail>
     </div>

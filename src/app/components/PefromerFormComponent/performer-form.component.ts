@@ -8,10 +8,9 @@ import { Performer } from "../../model/Performer";
   styleUrls: ['./performer-form.component.css']
 })
 export class PerformerFormComponent implements OnInit {
+  @Input() performer?: Performer;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
-
-  @Input() performer?: Performer;
 
   update: boolean = false;
   submitted:  boolean = false;
