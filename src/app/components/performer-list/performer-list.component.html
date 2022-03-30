@@ -5,8 +5,8 @@
         <h2>Performers</h2>
       </div>
       <div class="right">
-        <app-button *ngIf="hasRoute('/admin')" text="Add Performer" color="green"
-                    (btnClick)="addPerformer()"></app-button>
+        <button *ngIf="hasRoute('/admin')" class="btn green"
+                    (click)="addPerformer()">Add performer</button>
       </div>
     </div>
     <div *ngIf="addClicked">

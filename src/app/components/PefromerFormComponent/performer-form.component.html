@@ -17,9 +17,9 @@
       <input *ngIf="!update" type="text" name="style" [(ngModel)]="style" id="style" placeholder="What is the style of the music?"/>
       <input *ngIf="update && performer" type="text" name="{{performer.style}}" [(ngModel)]="performer.style" id="{{performer.style}}" placeholder="What is the style of the music?"/>
     </div>
-    <app-button text="Save Performer" color="green" (btnClick)="onSubmit()"></app-button>
-    <app-button *ngIf="!update" text="Reset form" color="black" (btnClick)="resetForm()"></app-button>
-    <app-button text="Discard" color="red" (btnClick)="discardForm()"></app-button>
+    <button class="btn green" (click)="onSubmit()">Save performer</button>
+    <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
+    <button class="btn red" (click)="discardForm()">Discard</button>
   </div>
 </div>
 

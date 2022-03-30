@@ -9,10 +9,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>Age: {{performer.age}}</p>
-    <app-button text="Show Reviews" color="black" (btnClick)="showReviews()"></app-button>
-    <app-button text="Show Concerts" color="black" (btnClick)="showConcerts()"></app-button>
-    <app-button *ngIf="hasRoute('/admin')" text="Update Performer" color="green"
-                (btnClick)="updatePerformer()"></app-button>
+    <button class="btn black" (click)="showReviews()">Show reviews</button>
+    <button class="btn black"  (click)="showConcerts()">Show Concerts</button>
+    <button *ngIf="hasRoute('/admin')" class="btn green"
+              (click)="updatePerformer()">Update Performer</button>
     <i *ngIf="hasRoute('/admin')" (click)="deletePerformer(performer.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
