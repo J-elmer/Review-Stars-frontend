@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { PerformerListComponent } from './components/performer-list/performer-list.component';
-import { ButtonComponent } from './components/button/button.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -20,7 +19,6 @@ import { PerformerFormComponent } from './components/PefromerFormComponent/perfo
   declarations: [
     AppComponent,
     PerformerListComponent,
-    ButtonComponent,
     NavbarComponent,
     NotFoundComponent,
     PerformerDetailComponent,
