@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { Router} from "@angular/router";
 
-import { Performer } from "../../model/Performer";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import { Performer } from "../../../model/Performer";
+import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({

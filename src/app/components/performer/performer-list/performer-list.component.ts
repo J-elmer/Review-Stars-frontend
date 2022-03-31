@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
-import { Performer } from "../../model/Performer";
-import { PerformerService} from "../../services/performer.service";
+import { Performer } from "../../../model/Performer";
+import { PerformerService} from "../../../services/performer.service";
 import {Router} from "@angular/router";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({

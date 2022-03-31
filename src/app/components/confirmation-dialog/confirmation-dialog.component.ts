@@ -9,7 +9,14 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 export class ConfirmationDialogComponent implements OnInit {
   errorArray?: string[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+    title: string,
+    content?: string,
+    error?: object,
+    cancelOption?: string,
+    confirmOption: string,
+  }) {
+  }
 
   ngOnInit(): void {
     if (this.data.error) {

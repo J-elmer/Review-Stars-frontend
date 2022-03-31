@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import {PerformerListComponent} from "./components/performer-list/performer-list.component";
+import {PerformerListComponent} from "./components/performer/performer-list/performer-list.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
-import {PerformerFormComponent} from "./components/PefromerFormComponent/performer-form.component";
+import {PerformerFormComponent} from "./components/performer/PefromerFormComponent/performer-form.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/performers', pathMatch: 'full' },
