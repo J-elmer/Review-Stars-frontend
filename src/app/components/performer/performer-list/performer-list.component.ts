@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
-import { Performer } from "../../../model/Performer";
-import { PerformerService} from "../../../services/performer.service";
+import {Performer} from "../../../model/Performer";
+import {PerformerService} from "../../../services/performer.service";
 import {Router} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -30,16 +30,20 @@ export class PerformerListComponent implements OnInit {
     this.getPerformers();
   }
 
-  getPerformers() {
-    this.performerService.getPerformers().subscribe(performers => this.performers = performers);
-  }
-
-  addPerformer() {
+  addPerformer(): void {
     this.addClicked = !this.addClicked;
   }
 
-  discardForm() {
+  discardForm(): void {
     this.addClicked = false;
+  }
+
+  hasRoute(route: string): boolean {
+    return this.router.url === route;
+  }
+
+  getPerformers(): void {
+    this.performerService.getPerformers().subscribe(performers => this.performers = performers);
   }
 
   savePerformer(newPerformer: Performer) {
@@ -58,10 +62,10 @@ export class PerformerListComponent implements OnInit {
     });
   }
 
-  updatePerformer(updatedPerformer: Performer) {
+  updatePerformer(updatedPerformer: Performer): void {
     this.performerService.updatePerformer(updatedPerformer).subscribe((response) => {
       if (!response) {
-        M.toast({html: `Performer ${updatedPerformer.name} updated`, classes: 'rounded green'})
+        M.toast({html: `Performer ${updatedPerformer.name} updated`, classes: 'rounded green'});
         return;
       } else {
         this.dialog.open(ConfirmationDialogComponent, {data: {
@@ -74,7 +78,7 @@ export class PerformerListComponent implements OnInit {
     });
   }
 
-  deletePerformer(performerId: number) {
+  deletePerformer(performerId: number): void {
     this.performerService.deletePerformer(performerId)
       .subscribe((response) => {
         if (!response) {
@@ -85,9 +89,5 @@ export class PerformerListComponent implements OnInit {
           this.performers = this.performers.filter(p => p.id !== performerId);
         }
       });
-  }
-
-  hasRoute(route: string) {
-    return this.router.url === route;
   }
 }

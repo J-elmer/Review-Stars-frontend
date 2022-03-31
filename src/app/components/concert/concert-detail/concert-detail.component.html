@@ -1,0 +1,27 @@
+<mat-accordion class="headers-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span>Performer: {{performer.name}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        Date: {{concert.day}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Stage: {{concert.stage}}</p>
+    <p>Begin Time: {{concert.beginTime}}</p>
+    <p>End Time: {{concert.endTime}}</p>
+    <button class="btn black" (click)="showReviews()">Show reviews</button>
+    <button class="btn black"  (click)="showPerformer()">Show Performer</button>
+    <button *ngIf="hasRoute('/admin')" class="btn green"
+            (click)="updateConcert()">Update Concert</button>
+    <i *ngIf="hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--<div *ngIf="updateClicked">-->
+<!--  <performer-form-component-->
+<!--    [performer]="performer"-->
+<!--    (submitClicked)="saveUpdatedPerformer($event)"-->
+<!--    (discardClicked)="discardForm()"-->
+<!--  ></performer-form-component>-->
+<!--</div>-->

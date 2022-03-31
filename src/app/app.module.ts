@@ -16,6 +16,8 @@ import { PerformerFormComponent } from './components/performer/PefromerFormCompo
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import { ConcertListComponent } from './components/concert/concert-list/concert-list.component';
+import { ConcertDetailComponent } from './components/concert/concert-detail/concert-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {MatButtonModule} from "@angular/material/button";
     PerformerDetailComponent,
     AdminPageComponent,
     PerformerFormComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ConcertListComponent,
+    ConcertDetailComponent
   ],
   imports: [
     BrowserModule,
