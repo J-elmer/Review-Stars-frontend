@@ -43,6 +43,7 @@ export class PerformerListComponent implements OnInit {
   }
 
   savePerformer(newPerformer: Performer) {
+    this.addClicked = false;
     this.performerService.createPerformer(newPerformer).subscribe((response) => {
       if (!response) {
         this.performers.push(newPerformer);
@@ -62,8 +63,14 @@ export class PerformerListComponent implements OnInit {
       if (!response) {
         M.toast({html: `Performer ${updatedPerformer.name} updated`, classes: 'rounded green'})
         return;
+      } else {
+        this.dialog.open(ConfirmationDialogComponent, {data: {
+            title: 'Error',
+            error: response,
+            confirmOption: 'Ok'
+          }});
+        this.getPerformers();
       }
-      console.log(response);
     });
   }
 
