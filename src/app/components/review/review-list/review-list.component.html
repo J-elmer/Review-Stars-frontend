@@ -1,1 +1,27 @@
-<p>review-list works!</p>
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="left">
+        <h2>Reviews</h2>
+      </div>
+      <div class="right">
+        <button *ngIf="hasRoute('/admin')" class="btn green"
+                (click)="addReview()">Add Review</button>
+      </div>
+    </div>
+    <div *ngIf="addClicked">
+      <performer-form-component
+        (submitClicked)="saveReview($event)"
+        (discardClicked)="discardForm()"></performer-form-component>
+    </div>
+    <div class="list-detail-margin" *ngFor="let review of reviews">
+      <app-review-detail
+        (updateReviewClicked)="updateReview($event)"
+        (deleteClicked)="deleteReview(review.id!)"
+        [review]="review"></app-review-detail>
+    </div>
+  </div>
+</div>
+
+
+

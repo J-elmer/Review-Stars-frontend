@@ -13,7 +13,6 @@ import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmatio
 })
 export class PerformerDetailComponent implements OnInit {
   @Input() performer!: Performer;
-  @Input() updatedPerformer!: Performer;
   @Output() deleteClicked = new EventEmitter();
   @Output() updatePerformerClicked = new EventEmitter();
 
@@ -41,7 +40,7 @@ export class PerformerDetailComponent implements OnInit {
 
   saveUpdatedPerformer(updatedPerformer: Performer): void {
     this.updateClicked = false;
-    this.updatePerformerClicked.emit(updatedPerformer)
+    this.updatePerformerClicked.emit(updatedPerformer);
   }
 
   deletePerformer(performerId: number): void {

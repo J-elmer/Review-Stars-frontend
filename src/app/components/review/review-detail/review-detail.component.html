@@ -1,1 +1,28 @@
-<p>review-detail works!</p>
+<mat-accordion class="headers-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span>Concert by: {{performer.name}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <i *ngFor="let num of [].constructor(review.numberOfStars)" class="material-icons">stars</i>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Reviewer name: {{review.authorName}}</p>
+    <p>Review: {{review.reviewText}}</p>
+    <p>Concert performed on: {{concert.day}}</p>
+    <p>Review date: {{review.dateTimeOfReview}}</p>
+    <button class="btn black" (click)="showPerformer()">Show Performer</button>
+    <button class="btn black"  (click)="showConcert()">Show Concert</button>
+    <button *ngIf="hasRoute('/admin')" class="btn green"
+            (click)="updateReview()">Update Review</button>
+    <i *ngIf="hasRoute('/admin')" (click)="deleteReview(review.id!)" class="material-icons">delete</i>
+  </mat-expansion-panel>
+</mat-accordion>
+<div *ngIf="updateClicked">
+  <performer-form-component
+    [performer]="performer"
+    (submitClicked)="saveUpdateReview($event)"
+    (discardClicked)="discardForm()"
+  ></performer-form-component>
+</div>
