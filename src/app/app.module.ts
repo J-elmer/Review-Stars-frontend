@@ -19,6 +19,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { ConcertListComponent } from './components/concert/concert-list/concert-list.component';
 import { ConcertDetailComponent } from './components/concert/concert-detail/concert-detail.component';
 import { ConcertFormComponent } from './components/concert/concert-form/concert-form.component';
+import { ReviewListComponent } from './components/review/review-list/review-list.component';
+import { ReviewDetailComponent } from './components/review/review-detail/review-detail.component';
+import { ReviewFormComponent } from './components/review/review-form/review-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { ConcertFormComponent } from './components/concert/concert-form/concert-
     ConcertListComponent,
     ConcertDetailComponent,
     ConcertFormComponent,
+    ReviewListComponent,
+    ReviewDetailComponent,
+    ReviewFormComponent,
   ],
   imports: [
     BrowserModule,

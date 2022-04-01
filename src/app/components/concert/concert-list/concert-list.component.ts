@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
@@ -14,9 +14,6 @@ import { MatDialog} from "@angular/material/dialog";
   styleUrls: ['./concert-list.component.css']
 })
 export class ConcertListComponent implements OnInit {
-  @Input() newConcert!: Concert;
-  @Input() updatedConcerrt!: Concert;
-
   concerts: Concert[] = [];
   addClicked: boolean = false;
 
