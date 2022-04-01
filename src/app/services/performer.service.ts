@@ -71,7 +71,7 @@ export class PerformerService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       let errorResponse = error.error;
-      return of(errorResponse as T);
+        return of(errorResponse as T);
     }
   }
 }

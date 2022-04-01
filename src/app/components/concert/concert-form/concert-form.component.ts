@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
+import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
+import {Time} from "@angular/common";
 
 import {Concert} from "../../../model/Concert";
-import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {Performer} from "../../../model/Performer";
-import {Time} from "@angular/common";
 import {PerformerService} from "../../../services/performer.service";
 
 @Component({
@@ -46,10 +46,6 @@ export class ConcertFormComponent implements OnInit {
     this.performerService.getPerformers().subscribe(performers => {
       this.performers = performers;
     });
-  }
-
-  getPerformerList(): Performer[] {
-    return this.performers;
   }
 
   onSubmit(): void {

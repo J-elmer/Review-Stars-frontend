@@ -78,8 +78,8 @@ export class ConcertService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
+      let errorResponse = error.error;
+      return of(errorResponse as T);
     }
   }
 }

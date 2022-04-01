@@ -16,6 +16,7 @@
     </div>
     <div class="list-detail-margin" *ngFor="let concert of concerts">
       <app-concert-detail
+        (addReviewClicked)="saveReview($event)"
         (updateConcertClicked)="updateConcert($event)"
         (deleteClicked)="deleteConcert(concert.id!)"
         [concert]="concert"></app-concert-detail>

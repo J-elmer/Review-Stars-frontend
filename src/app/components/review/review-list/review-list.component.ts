@@ -43,22 +43,6 @@ export class ReviewListComponent implements OnInit {
     this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
   }
 
-  saveReview(newReview: Review): void {
-    this.addClicked = false;
-    this.reviewService.createReview(newReview).subscribe((response) => {
-      if (!response) {
-        this.reviews.push(newReview);
-        M.toast({html: `Review by ${newReview.authorName} saved`, classes: 'rounded green'})
-      } else {
-        this.dialog.open(ConfirmationDialogComponent, {data: {
-            title: 'Error',
-            error: response,
-            confirmOption: 'Ok'
-          }});
-      }
-    });
-  }
-
   updateReview(updatedReview: Review): void {
     this.reviewService.updateReview(updatedReview).subscribe((response) => {
       if (!response) {

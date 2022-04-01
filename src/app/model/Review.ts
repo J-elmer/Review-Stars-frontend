@@ -3,7 +3,7 @@ export interface Review {
   concertId: number;
   performerId: number;
   authorName: string;
-  dateTimeOfReview: Date;
+  dateTimeOfReview: number;
   numberOfStars: number;
   reviewText: string;
 }

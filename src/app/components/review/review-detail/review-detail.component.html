@@ -20,9 +20,9 @@
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="updateClicked">
-  <performer-form-component
-    [performer]="performer"
+  <app-review-form
+    [review]="review"
     (submitClicked)="saveUpdateReview($event)"
     (discardClicked)="discardForm()"
-  ></performer-form-component>
+  ></app-review-form>
 </div>

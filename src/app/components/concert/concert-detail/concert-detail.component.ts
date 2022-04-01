@@ -6,6 +6,7 @@ import { Concert } from "../../../model/Concert";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {Performer} from "../../../model/Performer";
 import { PerformerService} from "../../../services/performer.service";
+import {Review} from "../../../model/Review";
 
 @Component({
   selector: 'app-concert-detail',
@@ -17,9 +18,11 @@ export class ConcertDetailComponent implements OnInit {
   @Input() updatedConcert!: Concert;
   @Output() deleteClicked = new EventEmitter();
   @Output() updateConcertClicked = new EventEmitter();
+  @Output() addReviewClicked = new EventEmitter();
 
   updateClicked: boolean = false;
   performer!: Performer;
+  addClicked: boolean = false;
 
   constructor(
     private router: Router,
@@ -43,8 +46,19 @@ export class ConcertDetailComponent implements OnInit {
     console.log("show performer");
   }
 
+  addReview(): void {
+    if (this.updateClicked) {
+      this.updateClicked = false;
+    }
+    this.addClicked = !this.addClicked;
+  }
+
   updateConcert(): void {
     this.updateClicked = !this.updateClicked;
+  }
+
+  saveReview(newReview: Review): void {
+    this.addReviewClicked.emit(newReview);
   }
 
   saveUpdatedConcert(updatedConcert: Concert): void {
@@ -67,6 +81,7 @@ export class ConcertDetailComponent implements OnInit {
   }
 
   discardForm(): void {
+    this.addClicked = false;
     this.updateClicked = false;
   }
 

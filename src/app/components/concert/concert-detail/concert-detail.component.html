@@ -13,6 +13,7 @@
     <p>End Time: {{concert.endTime}}</p>
     <button class="btn black" (click)="showReviews()">Show reviews</button>
     <button class="btn black"  (click)="showPerformer()">Show Performer</button>
+    <button class="btn green" (click)="addReview()">Add Review</button>
     <button *ngIf="hasRoute('/admin')" class="btn green"
             (click)="updateConcert()">Update Concert</button>
     <i *ngIf="hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
@@ -24,4 +25,11 @@
     (submitClicked)="saveUpdatedConcert($event)"
     (discardClicked)="discardForm()"
   ></app-concert-form-component>
+</div>
+<div *ngIf="addClicked">
+  <app-review-form
+    [concert]="concert"
+    (submitClicked)="saveReview($event)"
+    (discardClicked)="discardForm()">
+  </app-review-form>
 </div>

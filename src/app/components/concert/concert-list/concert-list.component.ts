@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
-
-import { Concert } from "../../../model/Concert";
-import { ConcertService } from "../../../services/concert.service";
 import { Router } from "@angular/router";
 import { ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import { MatDialog} from "@angular/material/dialog";
+
+import { Concert } from "../../../model/Concert";
+import { ConcertService } from "../../../services/concert.service";
+import {Review} from "../../../model/Review";
+import {ReviewService} from "../../../services/review.service";
 
 @Component({
   selector: 'app-concert-list',
@@ -19,6 +21,7 @@ export class ConcertListComponent implements OnInit {
 
   constructor(
     private concertService: ConcertService,
+    private reviewService: ReviewService,
     private router: Router,
     private dialog: MatDialog,
   ) { }
@@ -61,6 +64,19 @@ export class ConcertListComponent implements OnInit {
     })
   }
 
+  saveReview(newReview: Review): void {
+    this.reviewService.createReview(newReview).subscribe((response) => {
+      if (!response.status) {
+        M.toast({html: `Review by ${newReview.authorName} saved`, classes: 'rounded green'})
+      } else {
+        this.dialog.open(ConfirmationDialogComponent, {data: {
+            title: 'Error',
+            error: response.error,
+            confirmOption: 'Ok'
+          }});
+      }
+    });
+  }
   updateConcert(updatedConcert: Concert): void {
     this.concertService.updateConcert(updatedConcert).subscribe((response) => {
       if (!response) {

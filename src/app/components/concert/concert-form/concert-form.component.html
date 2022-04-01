@@ -3,7 +3,6 @@
     <h2 *ngIf="!update">New Concert</h2>
     <h2 *ngIf="update">Update Concert</h2>
     <div class="form-control">
-      <p *ngFor="let performer of performers">{{performer.name}}</p>
       <label>Choose the performer of the concert</label>
       <div class="input-field">
       <select class="browser-default" *ngIf="!update" [(ngModel)]="this.performerId">
