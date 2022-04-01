@@ -10,9 +10,9 @@
       </div>
     </div>
     <div *ngIf="addClicked">
-      <performer-form-component
+      <app-concert-form-component
         (submitClicked)="saveConcert($event)"
-        (discardClicked)="discardForm()"></performer-form-component>
+        (discardClicked)="discardForm()"></app-concert-form-component>
     </div>
     <div class="app-performer-detail-margin" *ngFor="let concert of concerts">
       <app-concert-detail

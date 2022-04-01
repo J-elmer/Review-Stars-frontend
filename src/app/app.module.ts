@@ -12,12 +12,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PerformerDetailComponent } from './components/performer/performer-detail/performer-detail.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { PerformerFormComponent } from './components/performer/PefromerFormComponent/performer-form.component';
+import { PerformerFormComponent } from './components/performer/performer-form/performer-form.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import { ConcertListComponent } from './components/concert/concert-list/concert-list.component';
 import { ConcertDetailComponent } from './components/concert/concert-detail/concert-detail.component';
+import { ConcertFormComponentComponent } from './components/concert/concert-form/concert-form-component.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ConcertDetailComponent } from './components/concert/concert-detail/conc
     PerformerFormComponent,
     ConfirmationDialogComponent,
     ConcertListComponent,
-    ConcertDetailComponent
+    ConcertDetailComponent,
+    ConcertFormComponentComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,10 @@ export class ConcertDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getPerformer();
+  }
+
+  getPerformer() {
     this.performerService.getPerformerById(this.concert.performerId).subscribe(result => this.performer = result);
   }
 

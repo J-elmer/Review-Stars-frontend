@@ -18,10 +18,10 @@
     <i *ngIf="hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
-<!--<div *ngIf="updateClicked">-->
-<!--  <performer-form-component-->
-<!--    [performer]="performer"-->
-<!--    (submitClicked)="saveUpdatedPerformer($event)"-->
-<!--    (discardClicked)="discardForm()"-->
-<!--  ></performer-form-component>-->
-<!--</div>-->
+<div *ngIf="updateClicked">
+  <app-concert-form-component
+    [concert]="concert"
+    (submitClicked)="saveUpdatedConcert($event)"
+    (discardClicked)="discardForm()"
+  ></app-concert-form-component>
+</div>

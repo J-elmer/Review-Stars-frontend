@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {PerformerListComponent} from "./components/performer/performer-list/performer-list.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
-import {PerformerFormComponent} from "./components/performer/PefromerFormComponent/performer-form.component";
+import {PerformerFormComponent} from "./components/performer/performer-form/performer-form.component";
 import {ConcertListComponent} from "./components/concert/concert-list/concert-list.component";
 
 const routes: Routes = [
