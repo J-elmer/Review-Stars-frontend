@@ -79,7 +79,6 @@ export class ReviewFormComponent implements OnInit {
         concertId: this.concert.id!,
         performerId: this.performerId!,
         authorName: this.authorName!,
-        dateTimeOfReview: Date.now(),
         numberOfStars: this.numberOfStars!,
         reviewText: this.reviewText!,
       }

@@ -3,7 +3,6 @@ import {MatDialog} from "@angular/material/dialog";
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
-import {Time} from "@angular/common";
 
 import {Concert} from "../../../model/Concert";
 import {Performer} from "../../../model/Performer";
@@ -24,8 +23,8 @@ export class ConcertFormComponent implements OnInit {
   performerId?: number;
   stage?: string;
   day?: Date;
-  beginTime?: Time;
-  endTime?: Time;
+  beginTime?: Date;
+  endTime?: Date;
   performers: Performer[] = [];
   performer?: Performer;
 

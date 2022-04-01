@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
     <p>Reviewer name: {{review.authorName}}</p>
     <p>Review: {{review.reviewText}}</p>
-    <p>Concert performed on: {{concert.day}}</p>
+    <p>Concert performed on: {{concert.day | date: "MMMM dd, yyyy"}}</p>
     <p>Review date: {{review.dateTimeOfReview}}</p>
     <button class="btn black" (click)="showPerformer()">Show Performer</button>
     <button class="btn black"  (click)="showConcert()">Show Concert</button>

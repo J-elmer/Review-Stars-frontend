@@ -5,7 +5,7 @@
         <span *ngIf="performer">Performer: {{performer.name}}</span>
       </mat-panel-title>
       <mat-panel-description>
-        Date: {{concert.day}}
+        Date: {{concert.day | date: "MMMM dd, yyyy"}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>Stage: {{concert.stage}}</p>
