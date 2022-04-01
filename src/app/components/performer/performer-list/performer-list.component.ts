@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
@@ -84,6 +84,12 @@ export class PerformerListComponent implements OnInit {
             M.toast({html: `Performer ${performer.name} deleted`, classes: 'rounded red'})
           }
           this.performers = this.performers.filter(p => p.id !== performerId);
+        } else {
+          this.dialog.open(ConfirmationDialogComponent, {data: {
+              title: 'Error',
+              error: 'Could not delete performer',
+              confirmOption: 'Ok'
+            }});
         }
       });
   }

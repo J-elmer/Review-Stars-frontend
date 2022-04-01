@@ -85,6 +85,12 @@ export class ConcertListComponent implements OnInit {
           M.toast({html: `Concert on ${concert.day} deleted`, classes: 'rounded red'})
         }
         this.concerts = this.concerts.filter(c => c.id !== concertId);
+      } else {
+        this.dialog.open(ConfirmationDialogComponent, {data: {
+            title: 'Error',
+            error: 'Could not delete review',
+            confirmOption: 'Ok'
+          }});
       }
     });
   }
