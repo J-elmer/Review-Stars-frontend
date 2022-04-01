@@ -14,7 +14,7 @@
         (submitClicked)="saveConcert($event)"
         (discardClicked)="discardForm()"></app-concert-form-component>
     </div>
-    <div class="app-performer-detail-margin" *ngFor="let concert of concerts">
+    <div class="list-detail-margin" *ngFor="let concert of concerts">
       <app-concert-detail
         (updateConcertClicked)="updateConcert($event)"
         (deleteClicked)="deleteConcert(concert.id!)"

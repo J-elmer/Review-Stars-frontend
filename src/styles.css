@@ -11,4 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn {
   margin-right: 1rem;
 }
+.list-detail-margin {
+  margin: 2rem 0;
+}
 

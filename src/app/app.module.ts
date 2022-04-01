@@ -18,7 +18,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import { ConcertListComponent } from './components/concert/concert-list/concert-list.component';
 import { ConcertDetailComponent } from './components/concert/concert-detail/concert-detail.component';
-import { ConcertFormComponentComponent } from './components/concert/concert-form/concert-form-component.component';
+import { ConcertFormComponent } from './components/concert/concert-form/concert-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { ConcertFormComponentComponent } from './components/concert/concert-form
     ConfirmationDialogComponent,
     ConcertListComponent,
     ConcertDetailComponent,
-    ConcertFormComponentComponent,
+    ConcertFormComponent,
   ],
   imports: [
     BrowserModule,

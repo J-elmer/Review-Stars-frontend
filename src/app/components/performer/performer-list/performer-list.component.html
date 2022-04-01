@@ -14,7 +14,7 @@
         (submitClicked)="savePerformer($event)"
         (discardClicked)="discardForm()"></performer-form-component>
     </div>
-    <div class="app-performer-detail-margin" *ngFor="let performer of performers">
+    <div class="list-detail-margin" *ngFor="let performer of performers">
       <app-performer-detail
         (updatePerformerClicked)="updatePerformer($event)"
         (deleteClicked)="deletePerformer(performer.id!)"

@@ -2,7 +2,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <span>Performer: {{performer.name}}</span>
+        <span *ngIf="performer">Performer: {{performer.name}}</span>
       </mat-panel-title>
       <mat-panel-description>
         Date: {{concert.day}}

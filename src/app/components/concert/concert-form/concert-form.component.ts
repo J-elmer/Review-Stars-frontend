@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
+// @ts-ignore
+import * as M from 'materialize-css/dist/js/materialize';
 
 import {Concert} from "../../../model/Concert";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
@@ -9,10 +11,10 @@ import {PerformerService} from "../../../services/performer.service";
 
 @Component({
   selector: 'app-concert-form-component',
-  templateUrl: './concert-form-component.component.html',
-  styleUrls: ['./concert-form-component.component.css']
+  templateUrl: './concert-form.component.html',
+  styleUrls: ['./concert-form.component.css']
 })
-export class ConcertFormComponentComponent implements OnInit {
+export class ConcertFormComponent implements OnInit {
   @Input() concert?: Concert;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
@@ -25,7 +27,6 @@ export class ConcertFormComponentComponent implements OnInit {
   beginTime?: Time;
   endTime?: Time;
   performers: Performer[] = [];
-  default: string = "Choose a performer";
   performer?: Performer;
 
   constructor(
@@ -40,12 +41,14 @@ export class ConcertFormComponentComponent implements OnInit {
     this.getPerformers();
   }
 
-  getPerformer() {
-    this.performerService.getPerformerById(this.concert?.performerId!).subscribe(p => this.performer = p);
+  getPerformers(): void {
+    this.performerService.getPerformers().subscribe(performers => {
+      this.performers = performers;
+    });
   }
 
-  getPerformers(): void {
-    this.performerService.getPerformers().subscribe(performers => this.performers = performers);
+  getPerformerList(): Performer[] {
+    return this.performers;
   }
 
   onSubmit(): void {
