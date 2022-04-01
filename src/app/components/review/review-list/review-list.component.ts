@@ -51,7 +51,7 @@ export class ReviewListComponent implements OnInit {
       } else {
         this.dialog.open(ConfirmationDialogComponent, {data: {
             title: 'Error',
-            error: response,
+            error: response.error,
             confirmOption: 'Ok'
           }});
         this.getReviews();
