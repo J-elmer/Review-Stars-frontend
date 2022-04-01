@@ -8,6 +8,7 @@ import {Review} from "../../../model/Review";
 import {Performer} from "../../../model/Performer";
 import {Concert} from "../../../model/Concert";
 import {PerformerService} from "../../../services/performer.service";
+import {ConcertService} from "../../../services/concert.service";
 
 @Component({
   selector: 'app-review-form',
@@ -31,6 +32,7 @@ export class ReviewFormComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private performerService: PerformerService,
+    private concertService: ConcertService,
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +44,19 @@ export class ReviewFormComponent implements OnInit {
   }
 
   getPerformer() {
-    this.performerService.getPerformerById(this.concert.performerId!).subscribe(p => {
-      this.performer = p;
-    });
+    if (this.review) {
+      this.performerService.getPerformerById(this.review.performerId!).subscribe(p => {
+        this.performer = p;
+      });
+      this.concertService.getConcertById(this.review.concertId).subscribe(c => {
+        this.concert = c;
+      })
+    }
+    if (this.concert) {
+      this.performerService.getPerformerById(this.concert.performerId!).subscribe(p => {
+        this.performer = p;
+      });
+    }
   }
 
   onSubmit(): void {

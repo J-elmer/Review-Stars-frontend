@@ -19,7 +19,7 @@
     <i *ngIf="hasRoute('/admin')" (click)="deleteReview(review.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
-<div *ngIf="updateClicked">
+<div *ngIf="updateClicked && review">
   <app-review-form
     [review]="review"
     (submitClicked)="saveUpdateReview($event)"

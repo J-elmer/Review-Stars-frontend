@@ -54,6 +54,9 @@ export class ConcertDetailComponent implements OnInit {
   }
 
   updateConcert(): void {
+    if (this.addClicked) {
+      this.addClicked = false;
+    }
     this.updateClicked = !this.updateClicked;
   }
 

@@ -2,7 +2,7 @@
   <div class="section">
     <h2 *ngIf="!update">New Review</h2>
     <h2 *ngIf="update">Update Review</h2>
-    <div *ngIf="performer" class="form-control">
+    <div *ngIf="performer && concert" class="form-control">
       <label>Concert your reviewing:</label>
       <div class="input-field">
         <p>Performer: {{performer.name}}</p>
@@ -25,7 +25,7 @@
       <input *ngIf="!update" type="text" name="new-review-text" [(ngModel)]="reviewText" id="new-review-text" placeholder="Leave your review"/>
       <input *ngIf="update && review" type="text" name="updated-review-text" [(ngModel)]="review.reviewText" id="updated-review-text" placeholder="Leave your review"/>
     </div>
-    <button class="btn green" (click)="onSubmit()">Save performer</button>
+    <button class="btn green" (click)="onSubmit()">Save Review</button>
     <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
     <button class="btn red" (click)="discardForm()">Discard</button>
   </div>
