@@ -1,2 +1,10 @@
-<app-performer-list></app-performer-list>
-<app-concert-list></app-concert-list>
+<div class="container">
+  <div class="section">
+    <button class="btn green" (click)="showPerformersClicked()">Show performers</button>
+    <button class="btn green" (click)="showConcertsClicked()">Show concerts</button>
+    <button class="btn green" (click)="showReviewsClicked()">Show Reviews</button>
+  </div>
+</div>
+<app-performer-list *ngIf="showPerformers"></app-performer-list>
+<app-concert-list *ngIf="showConcerts"></app-concert-list>
+<p *ngIf="showReviews">Reviews</p>
