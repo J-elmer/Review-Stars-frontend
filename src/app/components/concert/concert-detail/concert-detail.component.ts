@@ -61,6 +61,7 @@ export class ConcertDetailComponent implements OnInit {
   }
 
   saveReview(newReview: Review): void {
+    this.addClicked = false;
     this.addReviewClicked.emit(newReview);
   }
 
