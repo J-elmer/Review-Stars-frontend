@@ -13,6 +13,7 @@ import {PerformerService} from "../../../services/performer.service";
   templateUrl: './concert-form.component.html',
   styleUrls: ['./concert-form.component.css']
 })
+
 export class ConcertFormComponent implements OnInit {
   @Input() concert?: Concert;
   @Output() submitClicked = new EventEmitter();

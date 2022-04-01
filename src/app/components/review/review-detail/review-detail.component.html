@@ -10,8 +10,8 @@
     </mat-expansion-panel-header>
     <p>Reviewer name: {{review.authorName}}</p>
     <p>Review: {{review.reviewText}}</p>
-    <p>Concert performed on: {{concert.day | date: "MMMM dd, yyyy"}}</p>
-    <p>Review date: {{review.dateTimeOfReview}}</p>
+    <p>Concert performed on: {{concert.day | date: "EEEE, MMMM d, y"}}</p>
+    <p>Reviewed on {{review.dateOfReview | date: "EEEE, MMMM d, y"}}</p>
     <button class="btn black" (click)="showPerformer()">Show Performer</button>
     <button class="btn black"  (click)="showConcert()">Show Concert</button>
     <button *ngIf="hasRoute('/admin')" class="btn green"
