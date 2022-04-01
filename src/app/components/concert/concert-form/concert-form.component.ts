@@ -37,6 +37,7 @@ export class ConcertFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.concert) {
       this.update = true;
+      this.performerId = this.concert.performerId;
     }
     this.getPerformers();
   }

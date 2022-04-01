@@ -2,14 +2,18 @@
   <div class="section">
     <h2 *ngIf="!update">New Concert</h2>
     <h2 *ngIf="update">Update Concert</h2>
-    <div>
+    <div class="form-control">
       <p *ngFor="let performer of performers">{{performer.name}}</p>
       <label>Choose the performer of the concert</label>
-      <div *ngIf="performers.length > 0" class="input-field">
+      <div class="input-field">
       <select class="browser-default" *ngIf="!update" [(ngModel)]="this.performerId">
         <option value="undefined" disabled selected hidden>Choose performer</option>
         <option *ngFor="let performer of performers" [value]="performer.id">{{performer.name}}</option>
       </select>
+        <select class="browser-default" *ngIf="update" [(ngModel)]="this.performerId">
+          <option value="undefined" disabled selected hidden>Choose performer</option>
+          <option *ngFor="let performer of performers" [value]="performer.id">{{performer.name}}</option>
+        </select>
       </div>
     </div>
     <div class="form-control">
