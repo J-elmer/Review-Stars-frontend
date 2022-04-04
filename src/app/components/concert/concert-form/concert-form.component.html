@@ -27,8 +27,8 @@
     </div>
     <div class="form-control">
       <label for="newBeginTime">At what time does the concert start?</label>
-      <input *ngIf="!update" class="timepicker-container" type="time" name="newBeginTime" [(ngModel)]="concert.beginTime" id="newBeginTime"/>
-      <input *ngIf="update" class="timepicker-container" type="time" name="updateBeginTime" [(ngModel)]="concert.beginTime" id="updateBeginTime"/>
+      <input *ngIf="!update" type="time" name="newBeginTime" [(ngModel)]="concert.beginTime" id="newBeginTime"/>
+      <input *ngIf="update" type="time" name="updateBeginTime" [(ngModel)]="concert.beginTime" id="updateBeginTime"/>
     </div>
     <div class="form-control">
       <label for="newEndTime">At what time does the concert end?</label>
