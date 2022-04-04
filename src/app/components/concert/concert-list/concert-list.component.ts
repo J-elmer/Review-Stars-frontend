@@ -133,4 +133,12 @@ export class ConcertListComponent implements OnInit {
       }
     });
   }
+
+  showUpcomingConcerts(): void {
+    console.log("ba");
+  }
+
+  showPastConcerts(): void {
+    console.log("ba");
+  }
 }

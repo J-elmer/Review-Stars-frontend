@@ -4,6 +4,13 @@
       <div class="left">
         <h2>Concerts</h2>
       </div>
+
+    </div>
+    <div class="row">
+      <div class="left">
+      <button class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
+      <button class="btn black" (click)="showPastConcerts()">Show past concerts</button>
+      </div>
       <div class="right">
         <button *ngIf="hasRoute('/admin')" class="btn green"
                 (click)="addConcert()">Add Concert

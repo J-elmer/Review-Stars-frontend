@@ -101,5 +101,4 @@ export class ConcertDetailComponent implements OnInit {
   concertInFuture(day: Date): boolean {
     return new Date(day) > new Date;
   }
-
 }
