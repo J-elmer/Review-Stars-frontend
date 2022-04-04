@@ -4,7 +4,7 @@ import * as M from 'materialize-css/dist/js/materialize';
 
 import {Performer} from "../../../model/Performer";
 import {PerformerService} from "../../../services/performer.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -18,15 +18,21 @@ export class PerformerListComponent implements OnInit {
   addClicked: boolean = false;
   performer: Performer = {};
 
-
   constructor(
     private performerService: PerformerService,
     private router: Router,
     public dialog: MatDialog,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getPerformers();
+    const id = Number((this.route.snapshot.paramMap.get('id')));
+    if (id) {
+      this.getPerformer(id);
+    }
+    if (!id) {
+      this.getPerformers();
+    }
   }
 
   addPerformer(): void {
@@ -43,6 +49,10 @@ export class PerformerListComponent implements OnInit {
 
   getPerformers(): void {
     this.performerService.getPerformers().subscribe(performers => this.performers = performers);
+  }
+
+  getPerformer(performerId: number): void {
+    this.performerService.getPerformerById(performerId).subscribe(p => this.performers.push(p));
   }
 
   savePerformer(newPerformer: Performer) {

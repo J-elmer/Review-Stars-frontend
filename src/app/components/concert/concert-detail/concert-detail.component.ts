@@ -37,16 +37,12 @@ export class ConcertDetailComponent implements OnInit {
 
   getPerformer() {
     if (this.concert.performerId) {
-      this  .performerService.getPerformerById(this.concert.performerId).subscribe(result => this.performer = result);
+      this.performerService.getPerformerById(this.concert.performerId).subscribe(result => this.performer = result);
     }
   }
 
   showReviews(): void {
     console.log("reviews");
-  }
-
-  showPerformer(): void {
-    console.log("show performer");
   }
 
   addReview(): void {
