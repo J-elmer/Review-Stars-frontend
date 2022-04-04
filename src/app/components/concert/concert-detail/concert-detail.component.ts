@@ -7,6 +7,7 @@ import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmatio
 import {Performer} from "../../../model/Performer";
 import { PerformerService} from "../../../services/performer.service";
 import {Review} from "../../../model/Review";
+import {ReviewService} from "../../../services/review.service";
 
 @Component({
   selector: 'app-concert-detail',
@@ -24,15 +25,20 @@ export class ConcertDetailComponent implements OnInit {
   performer!: Performer;
   addClicked: boolean = false;
   review: Review = {};
+  averageStars?: number;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private performerService: PerformerService,
+    private reviewService: ReviewService,
   ) { }
 
   ngOnInit(): void {
     this.getPerformer();
+    if (!this.concertInFuture(this.concert.day!)) {
+      this.getAverageStars(this.concert.id!);
+    }
   }
 
   getPerformer() {
@@ -77,6 +83,10 @@ export class ConcertDetailComponent implements OnInit {
         this.deleteClicked.emit(concertId);
       }
     });
+  }
+
+  getAverageStars(concertId: number) {
+    this.reviewService.getAverageStars(concertId).subscribe(s => this.averageStars = s);
   }
 
   discardForm(): void {

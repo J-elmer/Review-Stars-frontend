@@ -54,6 +54,13 @@ export class ReviewService {
     );
   }
 
+  getAverageStars(concertId: number): Observable<number> {
+    const url = `${this.reviewUrl}average-stars?concertId=${concertId}`;
+    return this.http.get<number>(url).pipe(
+      catchError(this.handleError<number>('getAverageStars'))
+    );
+  }
+
   getReviewsByConcertId(concertId: number): Observable<Review[]> {
     const url = `${this.reviewUrl}review-by-concert?concertId=${concertId}`;
     return this.http.get<Review[]>(url).pipe(
