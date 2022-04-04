@@ -22,5 +22,8 @@
         (deleteClicked)="deleteConcert(concert.id!)"
         [concert]="concert"></app-concert-detail>
     </div>
+    <div *ngIf="concerts.length === 0">
+      No concerts found.
+    </div>
   </div>
 </div>

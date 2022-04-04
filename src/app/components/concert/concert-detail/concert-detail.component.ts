@@ -41,10 +41,6 @@ export class ConcertDetailComponent implements OnInit {
     }
   }
 
-  showReviews(): void {
-    console.log("reviews");
-  }
-
   addReview(): void {
     if (this.updateClicked) {
       this.updateClicked = false;

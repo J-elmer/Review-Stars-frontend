@@ -54,6 +54,13 @@ export class ReviewService {
     );
   }
 
+  getReviewsByConcertId(concertId: number): Observable<Review[]> {
+    const url = `${this.reviewUrl}review-by-concert?concertId=${concertId}`;
+    return this.http.get<Review[]>(url).pipe(
+      catchError(this.handleError<Review[]>('getReviewsByConcertId', []))
+    );
+  }
+
   createReview(review: Review): Observable<any> {
     const url = `${this.reviewUrl}new`;
     return this.http.post<Review>(url, review, this.httpOptions).pipe(

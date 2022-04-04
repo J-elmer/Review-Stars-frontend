@@ -11,7 +11,7 @@
     <p>Stage: {{concert.stage}}</p>
     <p>Begin Time: {{concert.beginTime}}</p>
     <p>End Time: {{concert.endTime}}</p>
-    <button class="btn black" (click)="showReviews()">Show reviews</button>
+    <button class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
     <button *ngIf="performer" class="btn black"  routerLink="/performers/{{performer.id}}">Show Performer</button>
     <button class="btn green" (click)="addReview()">Add Review</button>
     <button *ngIf="hasRoute('/admin')" class="btn green"

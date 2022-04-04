@@ -4,7 +4,7 @@ import * as M from 'materialize-css/dist/js/materialize';
 
 import {Review} from "../../../model/Review";
 import {ReviewService} from "../../../services/review.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -21,10 +21,17 @@ export class ReviewListComponent implements OnInit {
     private reviewService: ReviewService,
     private router: Router,
     public dialog: MatDialog,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getReviews();
+    const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
+    if (concertId) {
+      this.getReviewsOfConcert(concertId);
+    }
+    if (!concertId) {
+      this.getReviews();
+    }
   }
 
   addReview(): void {
@@ -41,6 +48,10 @@ export class ReviewListComponent implements OnInit {
 
   getReviews(): void {
     this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
+  }
+
+  getReviewsOfConcert(concertId: number): void {
+    this.reviewService.getReviewsByConcertId(concertId).subscribe(reviews => this.reviews = reviews);
   }
 
   updateReview(updatedReview: Review): void {
