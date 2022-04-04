@@ -88,4 +88,8 @@ export class ConcertDetailComponent implements OnInit {
     return this.router.url === route;
   }
 
+  concertInFuture(day: Date): boolean {
+    return new Date(day) > new Date;
+  }
+
 }
