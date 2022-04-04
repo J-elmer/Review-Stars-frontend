@@ -15,19 +15,14 @@ import {PerformerService} from "../../../services/performer.service";
 })
 
 export class ConcertFormComponent implements OnInit {
-  @Input() concert?: Concert;
+  @Input() concert!: Concert;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
 
   update: boolean = false;
   submitted: boolean = false;
   performerId?: number;
-  stage?: string;
-  day?: Date;
-  beginTime?: Date;
-  endTime?: Date;
   performers: Performer[] = [];
-  performer?: Performer;
 
   constructor(
     public dialog: MatDialog,
@@ -35,7 +30,7 @@ export class ConcertFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.concert) {
+    if (this.concert.id) {
       this.update = true;
       this.performerId = this.concert.performerId;
     }
@@ -64,17 +59,9 @@ export class ConcertFormComponent implements OnInit {
 
   submitForm(): void {
     if (!this.update) {
-      let newConcert: Concert = {
-        performerId: this.performerId!,
-        stage: this.stage!,
-        day: this.day!,
-        beginTime: this.beginTime!,
-        endTime: this.endTime!,
-      }
-      this.submitClicked.emit(newConcert)
-    } else {
-      this.submitClicked.emit(this.concert);
+      this.concert.performerId = this.performerId;
     }
+    this.submitClicked.emit(this.concert);
   }
 
   resetForm(): void {
@@ -86,11 +73,11 @@ export class ConcertFormComponent implements OnInit {
       }});
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.performerId = undefined;
-        this.stage = "";
-        this.day = undefined;
-        this.beginTime = undefined;
-        this.endTime = undefined;
+        this.concert.performerId = undefined;
+        this.concert.stage = "";
+        this.concert.day = undefined;
+        this.concert.beginTime = undefined;
+        this.concert.endTime = undefined;
       }
     });
   }

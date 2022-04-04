@@ -16,6 +16,8 @@ import {MatDialog} from "@angular/material/dialog";
 export class PerformerListComponent implements OnInit {
   performers: Performer[] = [];
   addClicked: boolean = false;
+  performer: Performer = {};
+
 
   constructor(
     private performerService: PerformerService,

@@ -28,6 +28,7 @@
 </div>
 <div *ngIf="addClicked">
   <app-review-form
+    [review]="review"
     [concert]="concert"
     (submitClicked)="saveReview($event)"
     (discardClicked)="discardForm()">

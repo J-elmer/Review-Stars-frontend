@@ -12,17 +12,17 @@
     </div>
     <div class="form-control">
       <label for="new-author-name">Name reviewer</label>
-      <input *ngIf="!update" type="text" name="new-author-name" [(ngModel)]="authorName" id="new-author-name" placeholder="Fill in your name"/>
+      <input *ngIf="!update" type="text" name="new-author-name" [(ngModel)]="review.authorName" id="new-author-name" placeholder="Fill in your name"/>
       <input *ngIf="update && review" type="text" name="updated-author-name" [(ngModel)]="review.authorName" id="updated-author-name" placeholder="Fill in your name"/>
     </div>
     <div class="form-control">
       <label for="new-stars">Number of ReviewStars</label>
-      <input *ngIf="!update" type="number" min="1" max="5" name="new-stars" [(ngModel)]="numberOfStars" id="new-stars" placeholder="What number of stars would you give this concert from 1 - 5?"/>
+      <input *ngIf="!update" type="number" min="1" max="5" name="new-stars" [(ngModel)]="review.numberOfStars" id="new-stars" placeholder="What number of stars would you give this concert from 1 - 5?"/>
       <input *ngIf="update && review" type="number" min="1" max="5" name="updated-stars" [(ngModel)]="review.numberOfStars" id="updated-stars" placeholder="What number of stars would you give this concert from 1 - 5?"/>
     </div>
     <div class="form-control">
       <label for="new-review-text">Name reviewer</label>
-      <input *ngIf="!update" type="text" name="new-review-text" [(ngModel)]="reviewText" id="new-review-text" placeholder="Leave your review"/>
+      <input *ngIf="!update" type="text" name="new-review-text" [(ngModel)]="review.reviewText" id="new-review-text" placeholder="Leave your review"/>
       <input *ngIf="update && review" type="text" name="updated-review-text" [(ngModel)]="review.reviewText" id="updated-review-text" placeholder="Leave your review"/>
     </div>
     <button class="btn green" (click)="onSubmit()">Save Review</button>

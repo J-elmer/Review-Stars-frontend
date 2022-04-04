@@ -11,6 +11,7 @@
     </div>
     <div *ngIf="addClicked">
       <app-concert-form-component
+        [concert]="concert"
         (submitClicked)="saveConcert($event)"
         (discardClicked)="discardForm()"></app-concert-form-component>
     </div>

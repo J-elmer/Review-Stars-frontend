@@ -1,9 +1,9 @@
 export interface Review {
   id?: string;
-  concertId: number;
-  performerId: number;
-  authorName: string;
+  concertId?: number;
+  performerId?: number;
+  authorName?: string;
   dateOfReview?: Date;
-  numberOfStars: number;
-  reviewText: string;
+  numberOfStars?: number;
+  reviewText?: string;
 }

@@ -18,6 +18,7 @@ import {ReviewService} from "../../../services/review.service";
 export class ConcertListComponent implements OnInit {
   concerts: Concert[] = [];
   addClicked: boolean = false;
+  concert: Concert = {};
 
   constructor(
     private concertService: ConcertService,
@@ -51,7 +52,8 @@ export class ConcertListComponent implements OnInit {
     this.concertService.createConcert(newConcert).subscribe((response) => {
       if (!response) {
         this.concerts.push(newConcert);
-        M.toast({html: `Concert on ${newConcert.day} saved`, classes: 'rounded green'})
+        M.toast({html: `Concert on ${newConcert.day} saved`, classes: 'rounded green'});
+        this.getConcerts();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {
           data: {

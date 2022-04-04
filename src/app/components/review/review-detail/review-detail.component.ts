@@ -31,8 +31,10 @@ export class ReviewDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPerformer(this.review.performerId);
-    this.getConcert(this.review.concertId);
+    if (this.review.performerId && this.review.concertId) {
+      this.getPerformer(this.review.performerId);
+      this.getConcert(this.review.concertId);
+    }
   }
 
   getPerformer(performerId: number): void {

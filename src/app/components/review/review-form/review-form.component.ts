@@ -16,7 +16,7 @@ import {ConcertService} from "../../../services/concert.service";
   styleUrls: ['./review-form.component.css']
 })
 export class ReviewFormComponent implements OnInit {
-  @Input() review?: Review;
+  @Input() review!: Review;
   @Input() concert!: Concert;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
@@ -24,9 +24,6 @@ export class ReviewFormComponent implements OnInit {
   update: boolean = false;
   submitted: boolean = false;
   performerId?: number;
-  authorName?: string;
-  numberOfStars?: number;
-  reviewText?: string;
   performer!: Performer;
 
   constructor(
@@ -37,14 +34,14 @@ export class ReviewFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPerformer();
-    if (this.review) {
+    if (this.review.id) {
       this.update = true;
       this.performerId = this.review.performerId;
     }
   }
 
   getPerformer() {
-    if (this.review) {
+    if (this.review?.performerId && this.review.concertId) {
       this.performerService.getPerformerById(this.review.performerId!).subscribe(p => {
         this.performer = p;
       });
@@ -74,18 +71,10 @@ export class ReviewFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (!this.update) {
-      let newReview: Review = {
-        concertId: this.concert.id!,
-        performerId: this.performerId!,
-        authorName: this.authorName!,
-        numberOfStars: this.numberOfStars!,
-        reviewText: this.reviewText!,
-      }
-      this.submitClicked.emit(newReview)
-    } else {
-      this.submitClicked.emit(this.review);
+    if(!this.review.concertId) {
+      this.review.concertId = this.concert.id;
     }
+    this.submitClicked.emit(this.review);
   }
 
   resetForm(): void {
@@ -99,10 +88,9 @@ export class ReviewFormComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.performerId = undefined;
-        this.authorName = "";
-        this.numberOfStars = undefined;
-        this.reviewText = "";
+        this.review.authorName = "";
+        this.review.numberOfStars = undefined;
+        this.review.reviewText = "";
       }
     });
   }

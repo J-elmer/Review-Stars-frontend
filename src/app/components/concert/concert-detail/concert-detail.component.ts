@@ -23,6 +23,7 @@ export class ConcertDetailComponent implements OnInit {
   updateClicked: boolean = false;
   performer!: Performer;
   addClicked: boolean = false;
+  review: Review = {};
 
   constructor(
     private router: Router,
@@ -35,7 +36,9 @@ export class ConcertDetailComponent implements OnInit {
   }
 
   getPerformer() {
-    this.performerService.getPerformerById(this.concert.performerId).subscribe(result => this.performer = result);
+    if (this.concert.performerId) {
+      this  .performerService.getPerformerById(this.concert.performerId).subscribe(result => this.performer = result);
+    }
   }
 
   showReviews(): void {

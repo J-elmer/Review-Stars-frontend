@@ -1,6 +1,6 @@
 export interface Performer {
   id?: number;
-  name: string;
+  name?: string;
   age?: number,
-  style: string
+  style?: string
 }

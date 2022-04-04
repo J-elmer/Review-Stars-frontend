@@ -17,25 +17,25 @@
     </div>
     <div class="form-control">
       <label for="newday">Choose the date of the concert</label>
-      <input *ngIf="!update" type="date" name="newday" [(ngModel)]="day" id="newday"/>
-      <input *ngIf="update && concert" type="date" name="updateday" [(ngModel)]="concert.day" id="updateday"/>
+      <input *ngIf="!update" type="date" name="newday" [(ngModel)]="concert.day" id="newday"/>
+      <input *ngIf="update" type="date" name="updateday" [(ngModel)]="concert.day" id="updateday"/>
     </div>
     <div class="form-control">
       <label for="newstage">Stage</label>
-      <input *ngIf="!update" type="text" name="newstage" [(ngModel)]="stage" id="newstage" placeholder="At what stage does the concert take place?"/>
-      <input *ngIf="update && concert" type="text" name="updatestage" [(ngModel)]="concert.stage" id="updatestage" placeholder="What age is the performer?"/>
+      <input *ngIf="!update" type="text" name="newstage" [(ngModel)]="concert.stage" id="newstage" placeholder="At what stage does the concert take place?"/>
+      <input *ngIf="update" type="text" name="updatestage" [(ngModel)]="concert.stage" id="updatestage" placeholder="What age is the performer?"/>
     </div>
     <div class="form-control">
       <label for="newBeginTime">At what time does the concert start?</label>
-      <input *ngIf="!update" class="timepicker-container" type="time" name="newBeginTime" [(ngModel)]="beginTime" id="newBeginTime"/>
-      <input *ngIf="update && concert" class="timepicker-container" type="time" name="updateBeginTime" [(ngModel)]="concert.beginTime" id="updateBeginTime"/>
+      <input *ngIf="!update" class="timepicker-container" type="time" name="newBeginTime" [(ngModel)]="concert.beginTime" id="newBeginTime"/>
+      <input *ngIf="update" class="timepicker-container" type="time" name="updateBeginTime" [(ngModel)]="concert.beginTime" id="updateBeginTime"/>
     </div>
     <div class="form-control">
       <label for="newEndTime">At what time does the concert end?</label>
-      <input *ngIf="!update" type="time" name="newEndTime" [(ngModel)]="endTime" id="newEndTime"/>
-      <input *ngIf="update && concert" type="time" name="updateEndTime" [(ngModel)]="concert.endTime" id="updateEndTime"/>
+      <input *ngIf="!update" type="time" name="newEndTime" [(ngModel)]="concert.endTime" id="newEndTime"/>
+      <input *ngIf="update" type="time" name="updateEndTime" [(ngModel)]="concert.endTime" id="updateEndTime"/>
     </div>
-    <button class="btn green" (click)="onSubmit()">Save performer</button>
+    <button class="btn green" (click)="onSubmit()">Save Concert</button>
     <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
     <button class="btn red" (click)="discardForm()">Discard</button>
   </div>

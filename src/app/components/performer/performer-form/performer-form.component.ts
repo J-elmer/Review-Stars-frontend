@@ -10,22 +10,19 @@ import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmatio
   styleUrls: ['./performer-form.component.css']
 })
 export class PerformerFormComponent implements OnInit {
-  @Input() performer?: Performer;
+  @Input() performer!: Performer;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
 
   update: boolean = false;
   submitted:  boolean = false;
-  name?: string;
-  age?: number;
-  style?: string;
 
   constructor(
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    if (this.performer) {
+    if (this.performer.id) {
       this.update = true;
     }
   }
@@ -45,17 +42,7 @@ export class PerformerFormComponent implements OnInit {
   }
 
   submitForm() {
-    let newPerformer: Performer;
-    if (!this.update) {
-      newPerformer = {
-        name: this.name!,
-        age: this.age!,
-        style: this.style!
-      }
-      this.submitClicked.emit(newPerformer)
-    } else {
-      this.submitClicked.emit(this.performer);
-    }
+    this.submitClicked.emit(this.performer);
   }
 
   resetForm() {
@@ -67,9 +54,9 @@ export class PerformerFormComponent implements OnInit {
       }});
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.name = "";
-        this.age = undefined;
-        this.style = "";
+        this.performer.name = "";
+        this.performer.age = undefined;
+        this.performer.style = "";
       }
     });
   }

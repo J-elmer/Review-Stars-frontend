@@ -11,6 +11,7 @@
     </div>
     <div *ngIf="addClicked">
       <performer-form-component
+        [performer]="performer"
         (submitClicked)="savePerformer($event)"
         (discardClicked)="discardForm()"></performer-form-component>
     </div>
