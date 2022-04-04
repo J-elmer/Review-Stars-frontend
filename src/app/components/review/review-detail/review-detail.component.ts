@@ -45,10 +45,6 @@ export class ReviewDetailComponent implements OnInit {
     this.concertService.getConcertById(concertId).subscribe(c => this.concert = c);
   }
 
-  showPerformer(): void {
-    console.log("Performer");
-  }
-
   showConcert(): void {
     console.log("Concert");
   }
