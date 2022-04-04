@@ -26,10 +26,6 @@ export class PerformerDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showReviews(): void {
-    console.log("reviews");
-  }
-
   updatePerformer(): void {
     this.updateClicked = !this.updateClicked;
   }

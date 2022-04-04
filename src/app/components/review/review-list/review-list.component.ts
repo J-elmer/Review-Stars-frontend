@@ -26,10 +26,14 @@ export class ReviewListComponent implements OnInit {
 
   ngOnInit(): void {
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
+    const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     if (concertId) {
       this.getReviewsOfConcert(concertId);
     }
-    if (!concertId) {
+    if (performerId) {
+      this.getReviewsOfPerformer(performerId);
+    }
+    if (!concertId && !performerId) {
       this.getReviews();
     }
   }
@@ -52,6 +56,10 @@ export class ReviewListComponent implements OnInit {
 
   getReviewsOfConcert(concertId: number): void {
     this.reviewService.getReviewsByConcertId(concertId).subscribe(reviews => this.reviews = reviews);
+  }
+
+  getReviewsOfPerformer(performerId: number): void {
+    this.reviewService.getReviewsByPerformer(performerId).subscribe(reviews => this.reviews = reviews);
   }
 
   updateReview(updatedReview: Review): void {

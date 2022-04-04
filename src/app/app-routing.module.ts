@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'concerts/by-concert/:concert-id', component: ConcertListComponent },
   { path: 'reviews', component: ReviewListComponent },
   { path: 'reviews/by-concert/:concert-id', component: ReviewListComponent },
+  { path: 'reviews/by-performer/:performer-id', component: ReviewListComponent },
   { path: 'admin', component: AdminPageComponent},
   { path: '**', component: NotFoundComponent},
 ]
