@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import { MatDialog} from "@angular/material/dialog";
 
@@ -25,10 +25,21 @@ export class ConcertListComponent implements OnInit {
     private reviewService: ReviewService,
     private router: Router,
     private dialog: MatDialog,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getConcerts();
+    const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
+    const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
+    if (performerId) {
+      this.getConcertsByPerformer(performerId);
+    }
+    if (concertId) {
+      this.getConcertById(concertId);
+    }
+    if (!performerId && !concertId) {
+      this.getConcerts();
+    }
   }
 
   addConcert(): void {
@@ -41,6 +52,14 @@ export class ConcertListComponent implements OnInit {
 
   hasRoute(route: string): boolean {
     return this.router.url === route;
+  }
+
+  getConcertsByPerformer(id: number): void {
+    this.concertService.getConcertsByPerformer(id).subscribe(concerts => this.concerts = concerts);
+  }
+
+  getConcertById(id: number): void {
+    this.concertService.getConcertById(id).subscribe(c => this.concerts.push(c));
   }
 
   getConcerts(): void {

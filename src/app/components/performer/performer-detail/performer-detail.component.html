@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
     <p>Age: {{performer.age}}</p>
     <button class="btn black" (click)="showReviews()">Show reviews</button>
-    <button class="btn black"  (click)="showConcerts()">Show Concerts</button>
+    <button class="btn black"  routerLink="/concerts/by-performer/{{performer.id}}">Show Concerts</button>
     <button *ngIf="hasRoute('/admin')" class="btn green"
               (click)="updatePerformer()">Update Performer</button>
     <i *ngIf="hasRoute('/admin')" (click)="deletePerformer(performer.id!)" class="material-icons">delete</i>

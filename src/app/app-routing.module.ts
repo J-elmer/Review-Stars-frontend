@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'performers', component: PerformerListComponent },
   { path: 'performers/:id', component: PerformerListComponent },
   { path: 'concerts', component: ConcertListComponent },
+  { path: 'concerts/by-performer/:performer-id', component: ConcertListComponent },
+  { path: 'concerts/by-concert/:concert-id', component: ConcertListComponent },
   { path: 'reviews', component: ReviewListComponent },
   { path: 'admin', component: AdminPageComponent},
   { path: '**', component: NotFoundComponent},

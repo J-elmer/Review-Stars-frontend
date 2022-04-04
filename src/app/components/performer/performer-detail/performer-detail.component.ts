@@ -30,10 +30,6 @@ export class PerformerDetailComponent implements OnInit {
     console.log("reviews");
   }
 
-  showConcerts(): void {
-    console.log("concerts");
-  }
-
   updatePerformer(): void {
     this.updateClicked = !this.updateClicked;
   }
