@@ -55,7 +55,9 @@ export class ConcertListComponent implements OnInit {
   }
 
   getConcertsByPerformer(id: number): void {
-    this.concertService.getConcertsByPerformer(id).subscribe(concerts => this.concerts = concerts);
+    this.concertService.getConcertsByPerformer(id).subscribe(concerts => {
+      this.concerts = concerts
+    });
   }
 
   getConcertById(id: number): void {

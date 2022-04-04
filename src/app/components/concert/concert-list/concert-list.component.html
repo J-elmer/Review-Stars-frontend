@@ -6,7 +6,8 @@
       </div>
       <div class="right">
         <button *ngIf="hasRoute('/admin')" class="btn green"
-                (click)="addConcert()">Add Concert</button>
+                (click)="addConcert()">Add Concert
+        </button>
       </div>
     </div>
     <div *ngIf="addClicked">
@@ -15,12 +16,14 @@
         (submitClicked)="saveConcert($event)"
         (discardClicked)="discardForm()"></app-concert-form-component>
     </div>
-    <div class="list-detail-margin" *ngFor="let concert of concerts">
-      <app-concert-detail
-        (addReviewClicked)="saveReview($event)"
-        (updateConcertClicked)="updateConcert($event)"
-        (deleteClicked)="deleteConcert(concert.id!)"
-        [concert]="concert"></app-concert-detail>
+    <div *ngIf="concerts.length > 0">
+      <div class="list-detail-margin" *ngFor="let concert of concerts">
+        <app-concert-detail
+          (addReviewClicked)="saveReview($event)"
+          (updateConcertClicked)="updateConcert($event)"
+          (deleteClicked)="deleteConcert(concert.id!)"
+          [concert]="concert"></app-concert-detail>
+      </div>
     </div>
     <div *ngIf="concerts.length === 0">
       No concerts found.
