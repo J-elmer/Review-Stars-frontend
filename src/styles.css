@@ -23,6 +23,10 @@ i {
   cursor: pointer;
 }
 
+.star-icons {
+  color: #d4af37;
+}
+
 .headers-align .mat-expansion-panel-header-title,
 .mat-expansion-panel-header-description {
   flex-basis: 0;

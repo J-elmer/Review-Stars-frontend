@@ -5,7 +5,7 @@
         <span>Concert by: {{performer.name}}</span>
       </mat-panel-title>
       <mat-panel-description>
-        <i *ngFor="let num of [].constructor(review.numberOfStars)" class="material-icons">stars</i>
+        <i *ngFor="let num of [].constructor(review.numberOfStars)" class="material-icons star-icons">stars</i>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>Review: <span class="review">{{review.reviewText}}</span></p>
