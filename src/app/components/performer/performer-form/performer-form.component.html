@@ -5,22 +5,31 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-control">
         <label>Name</label>
+        <div *ngIf="submitted && form.controls['name'].errors" class="text-darken-1">
+          <div class="mat-error">Please provide a name</div>
+        </div>
         <input *ngIf="!update" type="text" formControlName="name" required placeholder="What is the performers name?"/>
-        <input *ngIf="update" type="text" formControlName="name" [(ngModel)]="performer.name" placeholder="What is the performers name?"/>
+        <input *ngIf="update" type="text" formControlName="name" placeholder="What is the performers name?"/>
       </div>
       <div class="form-control">
         <label>Age</label>
+        <div *ngIf="submitted && form.controls['age'].errors" class="text-darken-1">
+          <div class="mat-error">Please provide an age greater than 0</div>
+        </div>
         <input *ngIf="!update" type="number" formControlName="age" placeholder="What age is the performer?"/>
-        <input *ngIf="update" type="number" formControlName="age" [(ngModel)]="performer.age" placeholder="What age is the performer?"/>
+        <input *ngIf="update" type="number" formControlName="age" placeholder="What age is the performer?"/>
       </div>
       <div class="form-control">
         <label>Style</label>
+        <div *ngIf="submitted && form.controls['style'].errors" class="text-darken-1">
+          <div class="mat-error">Please provide a style </div>
+        </div>
         <input *ngIf="!update" type="text" formControlName="style" placeholder="What is the style of the music?"/>
-        <input *ngIf="update" type="text" formControlName="style" [(ngModel)]="performer.style" placeholder="What is the style of the music?"/>
+        <input *ngIf="update" type="text" formControlName="style" placeholder="What is the style of the music?"/>
       </div>
       <button class="btn green" type="submit">Save performer</button>
-      <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
-      <button class="btn red" (click)="discardForm()">Discard</button>
+      <button *ngIf="!update" type="button" class="btn black" (click)="resetForm()">Reset Form</button>
+      <button class="btn red" type="button" (click)="discardForm()">Discard</button>
     </form>
   </div>
 </div>

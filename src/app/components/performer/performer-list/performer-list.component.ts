@@ -79,7 +79,7 @@ export class PerformerListComponent implements OnInit {
     this.performerService.updatePerformer(updatedPerformer).subscribe((response) => {
       if (!response) {
         M.toast({html: `Performer ${updatedPerformer.name} updated`, classes: 'rounded green'});
-        return;
+        this.getPerformers();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {data: {
             title: 'Error',

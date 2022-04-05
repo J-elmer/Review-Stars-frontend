@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { Performer } from "../../../model/Performer";
+import {Performer} from "../../../model/Performer";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
-import { Validator} from "@angular/forms";
 
 @Component({
   selector: 'performer-form-component',
@@ -16,26 +15,28 @@ export class PerformerFormComponent implements OnInit {
   @Output() discardClicked = new EventEmitter();
 
   update: boolean = false;
-  submitted:  boolean = false;
+  submitted: boolean = false;
   form!: FormGroup;
 
   constructor(
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: ['', [
+      name: [this.performer.name, [
         Validators.required
-        ]]
+      ]]
       ,
-      age: [undefined, [
-        Validators.min(1)
+      age: [this.performer.age, [
+        Validators.min(1),
+        Validators.required,
       ]],
-      style: ['', [
+      style: [this.performer.style, [
         Validators.required]
-        ],
+      ],
     });
 
     if (this.performer.id) {
@@ -43,30 +44,29 @@ export class PerformerFormComponent implements OnInit {
     }
   }
 
-  getName() {
-    return this.form.get('email');
-  }
-
-  getAge() {
-    return this.form.get('age');
-  }
-
-  getStyle() {
-    return this.form.get('style');
-  }
-
   onSubmit() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
-      title: 'Confirm',
-      content: 'Are you sure you want to save this performer?',
-      cancelOption: 'No',
-      confirmOption: 'Yes'
-    }} );
+    this.submitted = true;
+    if (this.form.invalid) {
+      setTimeout(() => this.submitted = false, 10000);
+      return;
+    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm',
+        content: 'Are you sure you want to save this performer?',
+        cancelOption: 'No',
+        confirmOption: 'Yes'
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
         this.submitForm();
       }
+      if (result == false) {
+        this.submitted = false;
+      }
     });
+
   }
 
   submitForm() {
@@ -74,28 +74,30 @@ export class PerformerFormComponent implements OnInit {
   }
 
   resetForm() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
         title: 'Confirm',
         content: 'Are you sure you want to reset these fields?',
         cancelOption: 'No',
         confirmOption: 'Yes'
-      }});
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.performer.name = "";
-        this.performer.age = undefined;
-        this.performer.style = "";
+        this.form.reset();
       }
     });
   }
 
   discardForm() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
         title: 'Confirm',
         content: 'Are you sure you want to discard these changes?',
         cancelOption: 'No',
         confirmOption: 'Yes'
-      }});
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
         this.discardClicked.emit();
