@@ -11,7 +11,9 @@
         <div *ngIf="averageStars">
           <i *ngFor="let num of [].constructor(averageStars)" class="material-icons star-icons ">stars</i>
         </div>
-        <p *ngIf="!averageStars"></p>
+        <div *ngIf="!averageStars">
+          Concert not reviewed yet
+        </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>Stage: {{concert.stage}}</p>
