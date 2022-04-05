@@ -17,6 +17,7 @@ export class PerformerListComponent implements OnInit {
   performers: Performer[] = [];
   addClicked: boolean = false;
   performer: Performer = {};
+  redirected: boolean = false;
 
   constructor(
     private performerService: PerformerService,
@@ -28,6 +29,7 @@ export class PerformerListComponent implements OnInit {
   ngOnInit(): void {
     const id = Number((this.route.snapshot.paramMap.get('id')));
     if (id) {
+      this.redirected = true;
       this.getPerformer(id);
     }
     if (!id) {
@@ -48,6 +50,7 @@ export class PerformerListComponent implements OnInit {
   }
 
   getPerformers(): void {
+    this.redirected = false;
     this.performerService.getPerformers().subscribe(performers => this.performers = performers);
   }
 

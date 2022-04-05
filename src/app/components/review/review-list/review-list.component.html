@@ -5,6 +5,11 @@
         <h2>Reviews</h2>
       </div>
     </div>
+    <div *ngIf="redirected" class="row">
+      <div class="left">
+        <button class="btn black" (click)="getReviews()">Show all reviews</button>
+      </div>
+    </div>
     <div class="list-detail-margin" *ngFor="let review of reviews">
       <app-review-detail
         (updateReviewClicked)="updateReview($event)"

@@ -16,6 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 export class ReviewListComponent implements OnInit {
   reviews: Review[] = [];
   addClicked: boolean = false;
+  redirected: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
@@ -29,9 +30,11 @@ export class ReviewListComponent implements OnInit {
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     if (concertId) {
       this.getReviewsOfConcert(concertId);
+      this.redirected = true;
     }
     if (performerId) {
       this.getReviewsOfPerformer(performerId);
+      this.redirected = true;
     }
     if (!concertId && !performerId) {
       this.getReviews();
@@ -51,6 +54,7 @@ export class ReviewListComponent implements OnInit {
   }
 
   getReviews(): void {
+    this.redirected = false;
     this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
   }
 

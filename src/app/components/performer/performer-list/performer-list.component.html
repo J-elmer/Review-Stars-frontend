@@ -6,7 +6,13 @@
       </div>
       <div class="right">
         <button *ngIf="hasRoute('/admin')" class="btn green"
-                    (click)="addPerformer()">Add performer</button>
+                (click)="addPerformer()">Add performer
+        </button>
+      </div>
+    </div>
+    <div *ngIf="redirected"  class="row">
+      <div class="left">
+        <button class="btn black" (click)="getPerformers()">Show all performers</button>
       </div>
     </div>
     <div *ngIf="addClicked">
