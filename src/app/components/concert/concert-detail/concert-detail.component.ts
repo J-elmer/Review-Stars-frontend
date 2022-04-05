@@ -74,7 +74,7 @@ export class ConcertDetailComponent implements OnInit {
   deleteConcert(concertId: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
         title: 'Confirm',
-        content: 'Are you sure you want to delete this concert?',
+        content: 'Are you sure you want to delete this concert? Warning: if this concert has reviews, these will also be deleted.',
         cancelOption: 'No',
         confirmOption: 'Yes'
       }});
