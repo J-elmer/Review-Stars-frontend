@@ -2,31 +2,44 @@
   <div class="section">
     <h2 *ngIf="!update">New Review</h2>
     <h2 *ngIf="update">Update Review</h2>
-    <div *ngIf="performer && concert" class="form-control">
-      <label>Concert your reviewing:</label>
-      <div class="input-field">
-        <p>Performer: {{performer.name}}</p>
-        <p>Date: {{concert.day}}</p>
-        <p>Stage: {{concert.stage}}</p>
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="performer && concert" class="form-control">
+        <label>Concert your reviewing:</label>
+        <div class="input-field">
+          <p>Performer: {{performer.name}}</p>
+          <p>Date: {{concert.day}}</p>
+          <p>Stage: {{concert.stage}}</p>
+        </div>
       </div>
-    </div>
-    <div class="form-control">
-      <label for="new-author-name">Name reviewer</label>
-      <input *ngIf="!update" type="text" name="new-author-name" [(ngModel)]="review.authorName" id="new-author-name" placeholder="Fill in your name"/>
-      <input *ngIf="update && review" type="text" name="updated-author-name" [(ngModel)]="review.authorName" id="updated-author-name" placeholder="Fill in your name"/>
-    </div>
-    <div class="form-control">
-      <label for="new-stars">Number of ReviewStars</label>
-      <input *ngIf="!update" type="number" min="1" max="5" name="new-stars" [(ngModel)]="review.numberOfStars" id="new-stars" placeholder="What number of stars would you give this concert from 1 - 5?"/>
-      <input *ngIf="update && review" type="number" min="1" max="5" name="updated-stars" [(ngModel)]="review.numberOfStars" id="updated-stars" placeholder="What number of stars would you give this concert from 1 - 5?"/>
-    </div>
-    <div class="form-control">
-      <label for="new-review-text">Name reviewer</label>
-      <input *ngIf="!update" type="text" name="new-review-text" [(ngModel)]="review.reviewText" id="new-review-text" placeholder="Leave your review"/>
-      <input *ngIf="update && review" type="text" name="updated-review-text" [(ngModel)]="review.reviewText" id="updated-review-text" placeholder="Leave your review"/>
-    </div>
-    <button class="btn green" (click)="onSubmit()">Save Review</button>
-    <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
-    <button class="btn red" (click)="discardForm()">Discard</button>
+      <div class="form-control">
+        <label>Name reviewer</label>
+        <div *ngIf="submitted && reviewForm.controls['authorName'].errors">
+          <div class="mat-error">Please provide a name</div>
+        </div>
+        <input *ngIf="!update" type="text" formControlName="authorName" placeholder="Fill in your name"/>
+        <input *ngIf="update && review" formControlName="authorName" placeholder="Fill in your name"/>
+      </div>
+      <div class="form-control">
+        <label>Number of ReviewStars</label>
+        <div *ngIf="submitted && reviewForm.controls['numberOfStars'].errors">
+          <div class="mat-error">Please provide a number of stars between 1 and 5</div>
+        </div>
+        <input *ngIf="!update" type="number" formControlName="numberOfStars"
+               placeholder="What number of stars would you give this concert from 1 - 5?"/>
+        <input *ngIf="update && review" formControlName="numberOfStars"
+               placeholder="What number of stars would you give this concert from 1 - 5?"/>
+      </div>
+      <div class="form-control">
+        <label>Write your review (max 150 words)</label>
+        <div *ngIf="submitted && reviewForm.controls['reviewText'].errors">
+          <div class="mat-error">Please provide a review of between 1 and 150 words</div>
+        </div>
+        <input *ngIf="!update" type="text" formControlName="reviewText" placeholder="Leave your review"/>
+        <input *ngIf="update && review" formControlName="reviewText" placeholder="Leave your review"/>
+      </div>
+      <button class="btn green" type="submit">Save Review</button>
+<!--      <button *ngIf="!update" type=button" class="btn black" (click)="resetForm()">Reset Form</button>-->
+      <button class="btn red" type="button" (click)="discardForm()">Discard</button>
+    </form>
   </div>
 </div>

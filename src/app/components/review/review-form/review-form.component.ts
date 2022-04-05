@@ -9,6 +9,7 @@ import {Performer} from "../../../model/Performer";
 import {Concert} from "../../../model/Concert";
 import {PerformerService} from "../../../services/performer.service";
 import {ConcertService} from "../../../services/concert.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-review-form',
@@ -25,11 +26,13 @@ export class ReviewFormComponent implements OnInit {
   submitted: boolean = false;
   performerId?: number;
   performer!: Performer;
+  reviewForm!: FormGroup;
 
   constructor(
     private dialog: MatDialog,
     private performerService: PerformerService,
     private concertService: ConcertService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +40,49 @@ export class ReviewFormComponent implements OnInit {
     if (this.review.id) {
       this.update = true;
       this.performerId = this.review.performerId;
+      this.buildUpdateForm();
+    } else {
+      this.buildForm();
     }
+  }
+
+  buildForm() {
+    this.reviewForm = this.formBuilder.group({
+      performerId: [this.performerId!],
+      concertId: [this.concert.id!],
+      authorName: [this.review.authorName, [
+        Validators.required
+      ]],
+      numberOfStars: [this.review.numberOfStars, [
+        Validators.min(1),
+        Validators.max(5),
+        Validators.required,
+      ]],
+      reviewText: [this.review.reviewText, [
+        Validators.required,
+        Validators.maxLength(150)
+      ]],
+    });
+  }
+
+  buildUpdateForm() {
+    this.reviewForm = this.formBuilder.group({
+      id: [this.review.id],
+      performerId: [this.review.performerId!],
+      concertId: [this.review.concertId!],
+      authorName: [this.review.authorName, [
+        Validators.required
+      ]],
+      numberOfStars: [this.review.numberOfStars, [
+        Validators.min(1),
+        Validators.max(5),
+        Validators.required,
+      ]],
+      reviewText: [this.review.reviewText, [
+        Validators.required,
+        Validators.maxLength(150)
+      ]],
+    });
   }
 
   getPerformer() {
@@ -57,6 +102,11 @@ export class ReviewFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitted = true;
+    if (this.reviewForm.invalid) {
+      setTimeout(() => this.submitted = false, 10000);
+      return;
+    }
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
         title: 'Confirm',
         content: 'Are you sure you want to save this review?',
@@ -67,6 +117,9 @@ export class ReviewFormComponent implements OnInit {
       if (result == true) {
         this.submitForm();
       }
+      if (result == false) {
+        this.submitted = false;
+      }
     });
   }
 
@@ -74,7 +127,7 @@ export class ReviewFormComponent implements OnInit {
     if(!this.review.concertId) {
       this.review.concertId = this.concert.id;
     }
-    this.submitClicked.emit(this.review);
+    this.submitClicked.emit(this.reviewForm.value);
   }
 
   resetForm(): void {

@@ -70,7 +70,7 @@ export class ReviewListComponent implements OnInit {
     this.reviewService.updateReview(updatedReview).subscribe((response) => {
       if (!response) {
         M.toast({html: `Review by ${updatedReview.authorName} updated`, classes: 'rounded green'});
-        return;
+        this.getReviews();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {data: {
             title: 'Error',
