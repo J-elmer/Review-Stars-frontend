@@ -91,7 +91,6 @@ export class ConcertFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log(this.concertForm.value);
     this.submitClicked.emit(this.concertForm.value);
   }
 
