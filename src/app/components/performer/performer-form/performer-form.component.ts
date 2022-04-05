@@ -16,7 +16,7 @@ export class PerformerFormComponent implements OnInit {
 
   update: boolean = false;
   submitted: boolean = false;
-  form!: FormGroup;
+  performerForm!: FormGroup;
 
   constructor(
     public dialog: MatDialog,
@@ -25,7 +25,7 @@ export class PerformerFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.performerForm = this.formBuilder.group({
       name: [this.performer.name, [
         Validators.required
       ]]
@@ -46,7 +46,7 @@ export class PerformerFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.form.invalid) {
+    if (this.performerForm.invalid) {
       setTimeout(() => this.submitted = false, 10000);
       return;
     }
@@ -70,7 +70,7 @@ export class PerformerFormComponent implements OnInit {
   }
 
   submitForm() {
-    this.submitClicked.emit(this.form.value);
+    this.submitClicked.emit(this.performerForm.value);
   }
 
   resetForm() {
@@ -84,7 +84,7 @@ export class PerformerFormComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.form.reset();
+        this.performerForm.reset();
       }
     });
   }

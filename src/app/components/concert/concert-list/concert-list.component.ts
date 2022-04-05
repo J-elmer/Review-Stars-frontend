@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 import {ActivatedRoute, Router} from "@angular/router";
-import { ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
-import { MatDialog} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
-import { Concert } from "../../../model/Concert";
-import { ConcertService } from "../../../services/concert.service";
+import {Concert} from "../../../model/Concert";
+import {ConcertService} from "../../../services/concert.service";
 import {Review} from "../../../model/Review";
 import {ReviewService} from "../../../services/review.service";
 
@@ -20,6 +20,8 @@ export class ConcertListComponent implements OnInit {
   addClicked: boolean = false;
   concert: Concert = {};
   redirected: boolean = false;
+  showsPastconcerts: boolean = false;
+  showsFutureConcerts: boolean = false
 
   constructor(
     private concertService: ConcertService,
@@ -27,7 +29,8 @@ export class ConcertListComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
@@ -64,17 +67,24 @@ export class ConcertListComponent implements OnInit {
     this.concertService.getConcertById(id).subscribe(c => this.concerts.push(c));
   }
 
-  getConcerts(): void {
-    this.concertService.getConcerts().subscribe(concerts => this.concerts = concerts);
+  showUpcomingConcerts(): void {
+    this.showsFutureConcerts = true;
+    this.showsPastconcerts = false;
+    this.concertService.getFutureConcerts().subscribe(concerts => this.concerts = concerts);
+  }
+
+  showPastConcerts(): void {
+    this.showsPastconcerts = true;
+    this.showsFutureConcerts = false;
+    this.concertService.getPastConcerts().subscribe(concerts => this.concerts = concerts);
   }
 
   saveConcert(newConcert: Concert): void {
     this.addClicked = false;
     this.concertService.createConcert(newConcert).subscribe((response) => {
       if (!response) {
-        this.concerts.push(newConcert);
         M.toast({html: `Concert on ${newConcert.day} saved`, classes: 'rounded green'});
-        this.getConcerts();
+        this.addConcertToList(newConcert);
       } else {
         this.dialog.open(ConfirmationDialogComponent, {
           data: {
@@ -91,29 +101,43 @@ export class ConcertListComponent implements OnInit {
     this.reviewService.createReview(newReview).subscribe((response) => {
       if (!response.status) {
         M.toast({html: `Review by ${newReview.authorName} saved`, classes: 'rounded green'})
+        this.checkWichConcertsToShow();
       } else {
-        this.dialog.open(ConfirmationDialogComponent, {data: {
+        this.dialog.open(ConfirmationDialogComponent, {
+          data: {
             title: 'Error',
             error: response.error,
             confirmOption: 'Ok'
-          }});
+          }
+        });
       }
     });
   }
+
   updateConcert(updatedConcert: Concert): void {
     this.concertService.updateConcert(updatedConcert).subscribe((response) => {
       if (!response) {
         M.toast({html: `Concert on ${updatedConcert.day} updated`, classes: 'rounded green'});
-        return;
+        this.checkWichConcertsToShow();
       } else {
-        this.dialog.open(ConfirmationDialogComponent, {data: {
+        this.dialog.open(ConfirmationDialogComponent, {
+          data: {
             title: 'Error',
             error: response,
             confirmOption: 'Ok'
-          }});
-        this.getConcerts();
+          }
+        });
       }
     });
+  }
+
+  checkWichConcertsToShow() {
+    if (this.showsFutureConcerts) {
+      this.showUpcomingConcerts();
+    }
+    if (this.showsPastconcerts) {
+      this.showPastConcerts()
+    }
   }
 
   deleteConcert(concertId: number): void {
@@ -125,20 +149,27 @@ export class ConcertListComponent implements OnInit {
         }
         this.concerts = this.concerts.filter(c => c.id !== concertId);
       } else {
-        this.dialog.open(ConfirmationDialogComponent, {data: {
+        this.dialog.open(ConfirmationDialogComponent, {
+          data: {
             title: 'Error',
             error: 'Could not delete review',
             confirmOption: 'Ok'
-          }});
+          }
+        });
       }
     });
   }
 
-  showUpcomingConcerts(): void {
-    this.concertService.getFutureConcerts().subscribe(concerts => this.concerts = concerts);
+  addConcertToList(concert: Concert) {
+    if (this.concertInFuture(concert.day!) && this.showsFutureConcerts) {
+      this.concerts.push(concert);
+    }
+    if (!this.concertInFuture(concert.day!) && this.showsPastconcerts) {
+      this.concerts.push(concert);
+    }
   }
 
-  showPastConcerts(): void {
-    this.concertService.getPastConcerts().subscribe(concerts => this.concerts = concerts);
+  concertInFuture(day: Date): boolean {
+    return new Date(day) > new Date;
   }
 }

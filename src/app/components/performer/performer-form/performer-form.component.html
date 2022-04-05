@@ -2,10 +2,10 @@
   <div class="section">
     <h2 *ngIf="!update">New Performer</h2>
     <h2 *ngIf="update">Update Performer</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="performerForm" (ngSubmit)="onSubmit()">
       <div class="form-control">
         <label>Name</label>
-        <div *ngIf="submitted && form.controls['name'].errors" class="text-darken-1">
+        <div *ngIf="submitted && performerForm.controls['name'].errors">
           <div class="mat-error">Please provide a name</div>
         </div>
         <input *ngIf="!update" type="text" formControlName="name" required placeholder="What is the performers name?"/>
@@ -13,7 +13,7 @@
       </div>
       <div class="form-control">
         <label>Age</label>
-        <div *ngIf="submitted && form.controls['age'].errors" class="text-darken-1">
+        <div *ngIf="submitted && performerForm.controls['age'].errors">
           <div class="mat-error">Please provide an age greater than 0</div>
         </div>
         <input *ngIf="!update" type="number" formControlName="age" placeholder="What age is the performer?"/>
@@ -21,7 +21,7 @@
       </div>
       <div class="form-control">
         <label>Style</label>
-        <div *ngIf="submitted && form.controls['style'].errors" class="text-darken-1">
+        <div *ngIf="submitted && performerForm.controls['style'].errors">
           <div class="mat-error">Please provide a style </div>
         </div>
         <input *ngIf="!update" type="text" formControlName="style" placeholder="What is the style of the music?"/>

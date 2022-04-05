@@ -7,6 +7,7 @@ import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmatio
 import {Concert} from "../../../model/Concert";
 import {Performer} from "../../../model/Performer";
 import {PerformerService} from "../../../services/performer.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-concert-form-component',
@@ -23,18 +24,42 @@ export class ConcertFormComponent implements OnInit {
   submitted: boolean = false;
   performerId?: number;
   performers: Performer[] = [];
+  concertForm!: FormGroup;
 
   constructor(
     public dialog: MatDialog,
     private performerService: PerformerService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.buildForm();
     if (this.concert.id) {
       this.update = true;
       this.performerId = this.concert.performerId;
     }
     this.getPerformers();
+  }
+
+  buildForm() {
+    this.concertForm = this.formBuilder.group({
+      id: [this.concert.id ? this.concert.id : undefined],
+      performerId: [this.concert.performerId, [
+        Validators.required
+      ]],
+      day: [this.concert.day, [
+        Validators.required
+      ]],
+      stage: [this.concert.stage, [
+        Validators.required,
+      ]],
+      beginTime: [this.concert.beginTime, [
+        Validators.required
+      ]],
+      endTime: [this.concert.endTime, [
+        Validators.required
+      ]],
+    });
   }
 
   getPerformers(): void {
@@ -44,6 +69,11 @@ export class ConcertFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitted = true;
+    if (this.concertForm.invalid) {
+      setTimeout(() => this.submitted = false, 10000);
+      return;
+    }
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
         title: 'Confirm',
         content: 'Are you sure you want to save this concert?',
@@ -54,14 +84,15 @@ export class ConcertFormComponent implements OnInit {
       if (result == true) {
         this.submitForm();
       }
+      if (result == false) {
+        this.submitted = false;
+      }
     });
   }
 
   submitForm(): void {
-    if (!this.update) {
-      this.concert.performerId = this.performerId;
-    }
-    this.submitClicked.emit(this.concert);
+    console.log(this.concertForm.value);
+    this.submitClicked.emit(this.concertForm.value);
   }
 
   resetForm(): void {
@@ -73,11 +104,7 @@ export class ConcertFormComponent implements OnInit {
       }});
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.concert.performerId = undefined;
-        this.concert.stage = "";
-        this.concert.day = undefined;
-        this.concert.beginTime = undefined;
-        this.concert.endTime = undefined;
+        this.concertForm.reset();
       }
     });
   }
