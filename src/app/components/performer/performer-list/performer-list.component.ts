@@ -64,6 +64,7 @@ export class PerformerListComponent implements OnInit {
       if (!response) {
         this.performers.push(newPerformer);
         M.toast({html: `Performer ${newPerformer.name} saved`, classes: 'rounded green'})
+        this.getPerformers();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {data: {
             title: 'Error',

@@ -2,23 +2,25 @@
   <div class="section">
     <h2 *ngIf="!update">New Performer</h2>
     <h2 *ngIf="update">Update Performer</h2>
-    <div class="form-control">
-      <label for="new-name">Name</label>
-      <input *ngIf="!update" type="text" name="new-name" [(ngModel)]="performer.name" id="new-name" placeholder="What is the performers name?"/>
-      <input *ngIf="update" type="text" name="updated-name" [(ngModel)]="performer.name" id="updated-name" placeholder="What is the performers name?"/>
-    </div>
-    <div class="form-control">
-      <label for="new-age">Age</label>
-      <input *ngIf="!update" type="number" name="new-age" [(ngModel)]="performer.age" id="new-age" placeholder="What age is the performer?"/>
-      <input *ngIf="update" type="number" name="updated-age" [(ngModel)]="performer.age" id="updated-age" placeholder="What age is the performer?"/>
-    </div>
-    <div class="form-control">
-      <label for="new-style">Style</label>
-      <input *ngIf="!update" type="text" name="new-style" [(ngModel)]="performer.style" id="new-style" placeholder="What is the style of the music?"/>
-      <input *ngIf="update" type="text" name="updated-style" [(ngModel)]="performer.style" id="updated-style" placeholder="What is the style of the music?"/>
-    </div>
-    <button class="btn green" (click)="onSubmit()">Save performer</button>
-    <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
-    <button class="btn red" (click)="discardForm()">Discard</button>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label>Name</label>
+        <input *ngIf="!update" type="text" formControlName="name" required placeholder="What is the performers name?"/>
+        <input *ngIf="update" type="text" formControlName="name" [(ngModel)]="performer.name" placeholder="What is the performers name?"/>
+      </div>
+      <div class="form-control">
+        <label>Age</label>
+        <input *ngIf="!update" type="number" formControlName="age" placeholder="What age is the performer?"/>
+        <input *ngIf="update" type="number" formControlName="age" [(ngModel)]="performer.age" placeholder="What age is the performer?"/>
+      </div>
+      <div class="form-control">
+        <label>Style</label>
+        <input *ngIf="!update" type="text" formControlName="style" placeholder="What is the style of the music?"/>
+        <input *ngIf="update" type="text" formControlName="style" [(ngModel)]="performer.style" placeholder="What is the style of the music?"/>
+      </div>
+      <button class="btn green" type="submit">Save performer</button>
+      <button *ngIf="!update" class="btn black" (click)="resetForm()">Reset Form</button>
+      <button class="btn red" (click)="discardForm()">Discard</button>
+    </form>
   </div>
 </div>

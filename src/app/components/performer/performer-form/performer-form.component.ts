@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Performer } from "../../../model/Performer";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
+import { Validator} from "@angular/forms";
 
 @Component({
   selector: 'performer-form-component',
@@ -16,15 +17,42 @@ export class PerformerFormComponent implements OnInit {
 
   update: boolean = false;
   submitted:  boolean = false;
+  form!: FormGroup;
 
   constructor(
     public dialog: MatDialog,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      name: ['', [
+        Validators.required
+        ]]
+      ,
+      age: [undefined, [
+        Validators.min(1)
+      ]],
+      style: ['', [
+        Validators.required]
+        ],
+    });
+
     if (this.performer.id) {
       this.update = true;
     }
+  }
+
+  getName() {
+    return this.form.get('email');
+  }
+
+  getAge() {
+    return this.form.get('age');
+  }
+
+  getStyle() {
+    return this.form.get('style');
   }
 
   onSubmit() {
@@ -42,7 +70,7 @@ export class PerformerFormComponent implements OnInit {
   }
 
   submitForm() {
-    this.submitClicked.emit(this.performer);
+    this.submitClicked.emit(this.form.value);
   }
 
   resetForm() {
