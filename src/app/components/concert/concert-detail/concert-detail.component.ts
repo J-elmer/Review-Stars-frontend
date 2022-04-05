@@ -86,7 +86,12 @@ export class ConcertDetailComponent implements OnInit {
   }
 
   getAverageStars(concertId: number) {
-    this.reviewService.getAverageStars(concertId).subscribe(s => this.averageStars = s);
+    this.reviewService.getAverageStars(concertId).subscribe(s => {
+      if (isNaN(s)) {
+        return;
+      }
+      this.averageStars = s;
+    });
   }
 
   discardForm(): void {

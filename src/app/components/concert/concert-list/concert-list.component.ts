@@ -20,7 +20,7 @@ export class ConcertListComponent implements OnInit {
   addClicked: boolean = false;
   concert: Concert = {};
   redirected: boolean = false;
-  showsPastconcerts: boolean = false;
+  showsPastConcerts: boolean = false;
   showsFutureConcerts: boolean = false
 
   constructor(
@@ -69,12 +69,12 @@ export class ConcertListComponent implements OnInit {
 
   showUpcomingConcerts(): void {
     this.showsFutureConcerts = true;
-    this.showsPastconcerts = false;
+    this.showsPastConcerts = false;
     this.concertService.getFutureConcerts().subscribe(concerts => this.concerts = concerts);
   }
 
   showPastConcerts(): void {
-    this.showsPastconcerts = true;
+    this.showsPastConcerts = true;
     this.showsFutureConcerts = false;
     this.concertService.getPastConcerts().subscribe(concerts => this.concerts = concerts);
   }
@@ -135,7 +135,7 @@ export class ConcertListComponent implements OnInit {
     if (this.showsFutureConcerts) {
       this.showUpcomingConcerts();
     }
-    if (this.showsPastconcerts) {
+    if (this.showsPastConcerts) {
       this.showPastConcerts()
     }
   }
@@ -164,7 +164,7 @@ export class ConcertListComponent implements OnInit {
     if (this.concertInFuture(concert.day!) && this.showsFutureConcerts) {
       this.concerts.push(concert);
     }
-    if (!this.concertInFuture(concert.day!) && this.showsPastconcerts) {
+    if (!this.concertInFuture(concert.day!) && this.showsPastConcerts) {
       this.concerts.push(concert);
     }
   }
