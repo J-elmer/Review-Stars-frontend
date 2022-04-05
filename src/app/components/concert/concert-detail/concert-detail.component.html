@@ -17,9 +17,9 @@
     <p>Stage: {{concert.stage}}</p>
     <p>Begin Time: {{concert.beginTime}}</p>
     <p>End Time: {{concert.endTime}}</p>
-    <button class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
+    <button *ngIf="!concertInFuture(concert.day!)" class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
     <button *ngIf="performer" class="btn black"  routerLink="/performers/{{performer.id}}">Show Performer</button>
-    <button class="btn green" [disabled]="concertInFuture(concert.day!)" (click)="addReview()">Add Review</button>
+    <button *ngIf="!concertInFuture(concert.day!)" class="btn green" (click)="addReview()">Add Review</button>
     <button *ngIf="hasRoute('/admin')" class="btn green"
             (click)="updateConcert()">Update Concert</button>
     <i *ngIf="hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
