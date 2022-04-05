@@ -13,7 +13,7 @@
         </div>
         <div class="input-field">
           <select class="browser-default" *ngIf="!update" formControlName="performerId">
-            <option value="undefined" disabled selected hidden>Choose performer</option>
+            <option [ngValue]="null" hidden>Choose performer</option>
             <option *ngFor="let performer of performers" [value]="performer.id">{{performer.name}}</option>
           </select>
           <select class="browser-default" *ngIf="update" formControlName="performerId">
