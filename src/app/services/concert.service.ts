@@ -26,6 +26,20 @@ export class ConcertService {
     );
   }
 
+  getPastConcerts(): Observable<Concert[]> {
+    const url = `${this.concertUrl}past-concerts`;
+    return this.http.get<Concert[]>(url).pipe(
+      catchError(this.handleError<Concert[]>('getConcerts', []))
+    );
+  }
+
+  getFutureConcerts(): Observable<Concert[]> {
+    const url = `${this.concertUrl}future-concerts`;
+    return this.http.get<Concert[]>(url).pipe(
+      catchError(this.handleError<Concert[]>('getConcerts', []))
+    );
+  }
+
   getConcertsByPerformer(performerId: number): Observable<Concert[]> {
     const url = `${this.concertUrl}concerts-by-performer?performerId=${performerId}`;
     return this.http.get<Concert[]>(url).pipe(
