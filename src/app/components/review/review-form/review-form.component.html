@@ -38,7 +38,7 @@
         <input *ngIf="update && review" formControlName="reviewText" placeholder="Leave your review"/>
       </div>
       <button class="btn green" type="submit">Save Review</button>
-<!--      <button *ngIf="!update" type=button" class="btn black" (click)="resetForm()">Reset Form</button>-->
+      <button *ngIf="!update" type="button" class="btn black" (click)="resetForm()">Reset Form</button>
       <button class="btn red" type="button" (click)="discardForm()">Discard</button>
     </form>
   </div>

@@ -141,9 +141,7 @@ export class ReviewFormComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.review.authorName = "";
-        this.review.numberOfStars = undefined;
-        this.review.reviewText = "";
+        this.reviewForm.reset();
       }
     });
   }
