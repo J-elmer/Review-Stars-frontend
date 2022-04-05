@@ -19,6 +19,7 @@ export class ConcertListComponent implements OnInit {
   concerts: Concert[] = [];
   addClicked: boolean = false;
   concert: Concert = {};
+  redirected: boolean = false;
 
   constructor(
     private concertService: ConcertService,
@@ -32,13 +33,12 @@ export class ConcertListComponent implements OnInit {
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
     if (performerId) {
+      this.redirected = true;
       this.getConcertsByPerformer(performerId);
     }
     if (concertId) {
+      this.redirected = true;
       this.getConcertById(concertId);
-    }
-    if (!performerId && !concertId) {
-      this.getConcerts();
     }
   }
 
@@ -135,10 +135,10 @@ export class ConcertListComponent implements OnInit {
   }
 
   showUpcomingConcerts(): void {
-    console.log("ba");
+    this.concertService.getFutureConcerts().subscribe(concerts => this.concerts = concerts);
   }
 
   showPastConcerts(): void {
-    console.log("ba");
+    this.concertService.getPastConcerts().subscribe(concerts => this.concerts = concerts);
   }
 }

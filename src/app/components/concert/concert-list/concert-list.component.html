@@ -32,7 +32,7 @@
           [concert]="concert"></app-concert-detail>
       </div>
     </div>
-    <div *ngIf="concerts.length === 0">
+    <div *ngIf="concerts.length === 0 && redirected">
       No concerts found.
     </div>
   </div>
