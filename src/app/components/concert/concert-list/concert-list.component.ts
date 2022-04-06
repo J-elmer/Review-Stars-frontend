@@ -33,6 +33,9 @@ export class ConcertListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.hasRoute('/')) {
+      this.showUpcomingConcerts();
+    }
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
     if (performerId) {
@@ -70,7 +73,14 @@ export class ConcertListComponent implements OnInit {
   showUpcomingConcerts(): void {
     this.showsFutureConcerts = true;
     this.showsPastConcerts = false;
-    this.concertService.getFutureConcerts().subscribe(concerts => this.concerts = concerts);
+    this.concertService.getFutureConcerts().subscribe(concerts => {
+      if (this.hasRoute('/')) {
+        // concerts.sort((c1: Concert, c2: Concert) => {return (c1.day!) - (c2.day!)});
+        this.concerts = concerts.splice(0, 5);
+        return;
+      }
+      this.concerts = concerts
+    });
   }
 
   showPastConcerts(): void {

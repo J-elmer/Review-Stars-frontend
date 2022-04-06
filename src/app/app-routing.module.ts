@@ -7,9 +7,10 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
 import {ConcertListComponent} from "./components/concert/concert-list/concert-list.component";
 import {ReviewListComponent} from "./components/review/review-list/review-list.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/performers', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'performers', component: PerformerListComponent },
   { path: 'performers/:id', component: PerformerListComponent },
   { path: 'concerts', component: ConcertListComponent },

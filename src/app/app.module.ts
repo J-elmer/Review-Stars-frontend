@@ -22,6 +22,7 @@ import { ConcertFormComponent } from './components/concert/concert-form/concert-
 import { ReviewListComponent } from './components/review/review-list/review-list.component';
 import { ReviewDetailComponent } from './components/review/review-detail/review-detail.component';
 import { ReviewFormComponent } from './components/review/review-form/review-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ReviewFormComponent } from './components/review/review-form/review-form
     ReviewListComponent,
     ReviewDetailComponent,
     ReviewFormComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

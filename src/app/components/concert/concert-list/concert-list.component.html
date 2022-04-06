@@ -1,11 +1,11 @@
 <div class="container">
   <div class="section">
     <div class="row">
-      <div class="left">
+      <div  [hidden]="hasRoute('/')" class="left">
         <h2>Concerts</h2>
       </div>
     </div>
-    <div class="row">
+    <div [hidden]="hasRoute('/')" class="row">
       <div class="left">
       <button class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
       <button class="btn black" (click)="showPastConcerts()">Show past concerts</button>
