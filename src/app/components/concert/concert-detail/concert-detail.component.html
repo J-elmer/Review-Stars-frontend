@@ -7,11 +7,11 @@
       <mat-panel-description>
         {{concert.day | date: "EEEE, MMMM d, y"}}
       </mat-panel-description>
-      <mat-panel-description *ngIf="averageStars && !methodsService.concertInFuture(concert.day!)">
-        <div *ngIf="averageStars">
+      <mat-panel-description *ngIf="averageStars && !concertIsInFuture">
+        <div *ngIf="this.hasReviews">
           <i *ngFor="let num of [].constructor(averageStars)" class="material-icons star-icons ">stars</i>
         </div>
-        <div *ngIf="!averageStars">
+        <div *ngIf="!this.hasReviews">
           Concert not reviewed yet
         </div>
       </mat-panel-description>
@@ -19,12 +19,20 @@
     <p>Stage: {{concert.stage}}</p>
     <p>Begin Time: {{concert.beginTime}}</p>
     <p>End Time: {{concert.endTime}}</p>
-    <button *ngIf="!methodsService.concertInFuture(concert.day!)" class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
-    <button *ngIf="performer" class="btn black"  routerLink="/performers/{{performer.id}}">Show Performer</button>
-    <button *ngIf="!methodsService.concertInFuture(concert.day!)" class="btn green" (click)="addReview()">Add Review</button>
-    <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
-            (click)="updateConcert()">Update Concert</button>
-    <i *ngIf="methodsService.hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
+    <button *ngIf="!concertIsInFuture && !admin" class="btn black"
+            routerLink="/reviews/by-concert/{{concert.id}}">Show reviews
+    </button>
+    <button *ngIf="!concertIsInFuture && admin" class="btn black"
+            routerLink="/reviews/admin/by-concert/{{concert.id}}">Show reviews
+    </button>
+    <button *ngIf="performer && !admin" class="btn black" routerLink="/performers/{{performer.id}}">Show Performer</button>
+    <button *ngIf="performer && admin" class="btn black" routerLink="/performers/admin/{{performer.id}}">Show Performer</button>
+    <button *ngIf="!concertIsInFuture" class="btn green" (click)="addReview()">Add Review
+    </button>
+    <button *ngIf="admin" class="btn green"
+            (click)="updateConcert()">Update Concert
+    </button>
+    <i *ngIf="admin" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="updateClicked">

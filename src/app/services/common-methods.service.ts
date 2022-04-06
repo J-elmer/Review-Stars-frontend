@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +26,12 @@ export class CommonMethodsService {
       return -1;
     }
     return 0;
+  }
+
+  redirectedFromAdmin(route: ActivatedRoute) {
+    if (route.snapshot.url[1]) {
+      return route.snapshot.url[1].path === 'admin';
+    }
+    return false;
   }
 }

@@ -18,16 +18,27 @@ export class ReviewListComponent implements OnInit {
   reviews: Review[] = [];
   addClicked: boolean = false;
   redirected: boolean = false;
+  admin: boolean = false;
+  displayedOnHomePage: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    public methodsService: CommonMethodsService,
+    private methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
+    if (this.methodsService.hasRoute('/')) {
+      this.displayedOnHomePage = true;
+    }
+    if (this.methodsService.redirectedFromAdmin(this.route)) {
+      this.admin = true;
+    }
+    if (this.methodsService.hasRoute('/admin')) {
+      this.admin = true;
+    }
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     if (concertId) {

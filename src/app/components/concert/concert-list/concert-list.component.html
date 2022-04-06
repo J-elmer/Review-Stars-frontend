@@ -1,17 +1,20 @@
 <div class="container">
   <div class="section">
     <div class="row">
-      <div [hidden]="methodsService.hasRoute('/')" class="left">
+      <div [hidden]="displayedOnHomePage" class="left">
         <h2>Concerts</h2>
       </div>
     </div>
-    <div [hidden]="methodsService.hasRoute('/')" class="row">
+    <div [hidden]="displayedOnHomePage" class="row">
       <div class="left">
-      <button class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
-      <button class="btn black" (click)="showPastConcerts()">Show past concerts</button>
+        <button *ngIf="!redirected" class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
+        <button *ngIf="!redirected" class="btn black" (click)="showPastConcerts()">Show past concerts</button>
+        <button *ngIf="redirected" class="btn black" (click)="showUpcomingConcerts()">Show all upcoming concerts
+        </button>
+        <button *ngIf="redirected" class="btn black" (click)="showPastConcerts()">Show all past concerts</button>
       </div>
       <div class="right">
-        <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
+        <button *ngIf="admin" class="btn green"
                 (click)="addConcert()">Add Concert
         </button>
       </div>
@@ -28,7 +31,9 @@
           (addReviewClicked)="saveReview($event)"
           (updateConcertClicked)="updateConcert($event)"
           (deleteClicked)="deleteConcert(concert.id!)"
-          [concert]="concert"></app-concert-detail>
+          [concert]="concert"
+          [admin]="admin">
+        </app-concert-detail>
       </div>
     </div>
     <div *ngIf="concerts.length === 0 && redirected">

@@ -5,7 +5,7 @@
         <h2>Performers</h2>
       </div>
       <div class="right">
-        <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
+        <button *ngIf="admin" class="btn green"
                 (click)="addPerformer()">Add performer
         </button>
       </div>
@@ -25,7 +25,9 @@
       <app-performer-detail
         (updatePerformerClicked)="updatePerformer($event)"
         (deleteClicked)="deletePerformer(performer.id!)"
-        [performer]="performer"></app-performer-detail>
+        [performer]="performer"
+        [admin]="admin"
+      ></app-performer-detail>
     </div>
   </div>
 </div>

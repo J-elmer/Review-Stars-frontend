@@ -1,6 +1,6 @@
 <div class="container">
   <div class="section">
-    <div [hidden]="methodsService.hasRoute('/')" class="row">
+    <div [hidden]="displayedOnHomePage" class="row">
       <div class="left">
         <h2>Reviews</h2>
       </div>
@@ -14,7 +14,9 @@
       <app-review-detail
         (updateReviewClicked)="updateReview($event)"
         (deleteClicked)="deleteReview(review.id!)"
-        [review]="review"></app-review-detail>
+        [review]="review"
+        [admin]="admin">
+      </app-review-detail>
     </div>
     <div *ngIf="reviews.length === 0">
       No reviews found.

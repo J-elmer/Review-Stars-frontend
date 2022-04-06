@@ -23,17 +23,25 @@ export class ConcertListComponent implements OnInit {
   redirected: boolean = false;
   showsPastConcerts: boolean = false;
   showsFutureConcerts: boolean = false
+  admin: boolean = false;
+  displayedOnHomePage = false;
 
   constructor(
     private concertService: ConcertService,
     private reviewService: ReviewService,
-    public methodsService: CommonMethodsService,
+    private methodsService: CommonMethodsService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
+    if (this.methodsService.hasRoute('/')) {
+      this.displayedOnHomePage = true;
+    }
+    if (this.methodsService.redirectedFromAdmin(this.route) || this.methodsService.hasRoute('/admin')) {
+      this.admin = true;
+    }
     if (this.methodsService.hasRoute('/')) {
       this.showUpcomingConcerts();
     }
@@ -59,7 +67,7 @@ export class ConcertListComponent implements OnInit {
 
   getConcertsByPerformer(id: number): void {
     this.concertService.getConcertsByPerformer(id).subscribe(concerts => {
-      this.concerts = concerts
+      this.concerts = this.sortConcertsByDate(concerts);
     });
   }
 
@@ -73,7 +81,7 @@ export class ConcertListComponent implements OnInit {
     this.concertService.getFutureConcerts().subscribe(concerts => {
       if (this.methodsService.hasRoute('/')) {
         concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!));
-        this.concerts = concerts.splice(0, 5);
+        this.concerts = this.sortConcertsByDate(concerts).splice(0, 5);
         return;
       }
       this.concerts = concerts
@@ -174,5 +182,10 @@ export class ConcertListComponent implements OnInit {
     if (!this.methodsService.concertInFuture(concert.day!) && this.showsPastConcerts) {
       this.concerts.push(concert);
     }
+  }
+
+  sortConcertsByDate(concerts: Concert[]): Concert[] {
+    concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!))
+    return concerts;
   }
 }

@@ -7,7 +7,6 @@ import {Concert} from "../../../model/Concert";
 import {Performer} from "../../../model/Performer";
 import {ConcertService} from "../../../services/concert.service";
 import {PerformerService} from "../../../services/performer.service";
-import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-review-detail',
@@ -16,6 +15,7 @@ import {CommonMethodsService} from "../../../services/common-methods.service";
 })
 export class ReviewDetailComponent implements OnInit {
   @Input() review!: Review;
+  @Input() admin!: boolean;
   @Output() deleteClicked = new EventEmitter();
   @Output() updateReviewClicked = new EventEmitter();
 
@@ -27,7 +27,6 @@ export class ReviewDetailComponent implements OnInit {
     public dialog: MatDialog,
     private performerService: PerformerService,
     private concertService: ConcertService,
-    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {

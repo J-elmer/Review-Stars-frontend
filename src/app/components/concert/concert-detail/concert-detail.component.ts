@@ -17,6 +17,7 @@ import {CommonMethodsService} from "../../../services/common-methods.service";
 export class ConcertDetailComponent implements OnInit {
   @Input() concert!: Concert;
   @Input() updatedConcert!: Concert;
+  @Input() admin!: boolean;
   @Output() deleteClicked = new EventEmitter();
   @Output() updateConcertClicked = new EventEmitter();
   @Output() addReviewClicked = new EventEmitter();
@@ -27,18 +28,22 @@ export class ConcertDetailComponent implements OnInit {
   review: Review = {};
   averageStars?: number;
   hasReviews?: boolean;
+  concertIsInFuture: boolean = false;
 
   constructor(
     public dialog: MatDialog,
     private performerService: PerformerService,
     private reviewService: ReviewService,
-    public methodsService: CommonMethodsService,
+    private methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
     this.getPerformer();
     if (!this.methodsService.concertInFuture(this.concert.day!)) {
       this.getAverageStars(this.concert.id!);
+    }
+    if (this.methodsService.concertInFuture(this.concert.day!)) {
+      this.concertIsInFuture = true;
     }
   }
 

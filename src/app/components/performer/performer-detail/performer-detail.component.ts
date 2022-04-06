@@ -3,8 +3,6 @@ import {MatDialog} from "@angular/material/dialog";
 
 import { Performer } from "../../../model/Performer";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
-import {CommonMethodsService} from "../../../services/common-methods.service";
-
 
 @Component({
   selector: 'app-performer-detail',
@@ -13,6 +11,7 @@ import {CommonMethodsService} from "../../../services/common-methods.service";
 })
 export class PerformerDetailComponent implements OnInit {
   @Input() performer!: Performer;
+  @Input() admin!: boolean;
   @Output() deleteClicked = new EventEmitter();
   @Output() updatePerformerClicked = new EventEmitter();
 
@@ -20,7 +19,6 @@ export class PerformerDetailComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {

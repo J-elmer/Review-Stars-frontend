@@ -19,16 +19,23 @@ export class PerformerListComponent implements OnInit {
   addClicked: boolean = false;
   performer: Performer = {};
   redirected: boolean = false;
+  admin: boolean = false;
 
   constructor(
     private performerService: PerformerService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    public methodsService: CommonMethodsService,
+    private methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
     const id = Number((this.route.snapshot.paramMap.get('id')));
+    if (this.methodsService.redirectedFromAdmin(this.route)) {
+      this.admin = true;
+    }
+    if (this.methodsService.hasRoute('/admin')) {
+      this.admin = true;
+    }
     if (id) {
       this.redirected = true;
       this.getPerformer(id);
