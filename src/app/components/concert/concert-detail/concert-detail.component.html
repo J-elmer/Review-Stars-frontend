@@ -7,7 +7,7 @@
       <mat-panel-description>
         {{concert.day | date: "EEEE, MMMM d, y"}}
       </mat-panel-description>
-      <mat-panel-description>
+      <mat-panel-description *ngIf="averageStars && !concertInFuture(concert.day!)">
         <div *ngIf="averageStars">
           <i *ngFor="let num of [].constructor(averageStars)" class="material-icons star-icons ">stars</i>
         </div>
