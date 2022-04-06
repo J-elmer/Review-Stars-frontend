@@ -55,7 +55,13 @@ export class ReviewListComponent implements OnInit {
 
   getReviews(): void {
     this.redirected = false;
-    this.reviewService.getReviews().subscribe(reviews => this.reviews = reviews);
+    this.reviewService.getReviews().subscribe(reviews =>  {
+      if (this.hasRoute('/')) {
+        this.reviews = reviews.splice(0, 5);
+        return;
+      }
+      this.reviews = reviews
+    });
   }
 
   getReviewsOfConcert(concertId: number): void {
