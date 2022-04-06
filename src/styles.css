@@ -31,3 +31,8 @@ i {
 .mat-expansion-panel-header-description {
   flex-basis: 0;
 }
+
+.italics {
+  font-style: italic;
+}
+
