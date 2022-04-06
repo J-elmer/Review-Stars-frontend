@@ -98,18 +98,16 @@ export class PerformerListComponent implements OnInit {
   deletePerformer(performerId: number): void {
     this.performerService.deletePerformer(performerId)
       .subscribe((response) => {
+        let performer = this.performers.find(p => p.id == performerId);
         if (!response) {
-          let performer = this.performers.find(p => p.id == performerId);
           if (performer) {
             M.toast({html: `Performer ${performer.name} deleted`, classes: 'rounded red'})
           }
           this.performers = this.performers.filter(p => p.id !== performerId);
         } else {
-          this.dialog.open(ConfirmationDialogComponent, {data: {
-              title: 'Error',
-              error: 'Could not delete performer',
-              confirmOption: 'Ok'
-            }});
+          if (performer) {
+            M.toast({html: `Performer ${performer.name} could not be deleted, first delete associated concerts`, classes: 'rounded red'})
+          }
         }
       });
   }
