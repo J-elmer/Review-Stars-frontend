@@ -56,6 +56,7 @@ export class ReviewListComponent implements OnInit {
   getReviews(): void {
     this.redirected = false;
     this.reviewService.getReviews().subscribe(reviews =>  {
+      reviews.sort((r1, r2) => this.compareTwoDates(r1.dateOfReview!, r2.dateOfReview!))
       if (this.hasRoute('/')) {
         this.reviews = reviews.splice(0, 5);
         return;
@@ -104,5 +105,15 @@ export class ReviewListComponent implements OnInit {
           }});
       }
     })
+  }
+
+  compareTwoDates(date: Date, otherDate: Date): number {
+    if (new Date(date) > new Date(otherDate)) {
+      return 1;
+    }
+    if (new Date(date) < new Date(otherDate)) {
+      return -1;
+    }
+    return 0;
   }
 }

@@ -75,7 +75,7 @@ export class ConcertListComponent implements OnInit {
     this.showsPastConcerts = false;
     this.concertService.getFutureConcerts().subscribe(concerts => {
       if (this.hasRoute('/')) {
-        // concerts.sort((c1: Concert, c2: Concert) => {return (c1.day!) - (c2.day!)});
+        concerts.sort((c1: Concert, c2: Concert) => this.compareTwoDates(c1.day!, c2.day!));
         this.concerts = concerts.splice(0, 5);
         return;
       }
@@ -181,5 +181,15 @@ export class ConcertListComponent implements OnInit {
 
   concertInFuture(day: Date): boolean {
     return new Date(day) > new Date;
+  }
+
+  compareTwoDates(date: Date, otherDate: Date): number {
+    if (new Date(date) > new Date(otherDate)) {
+      return 1;
+    }
+    if (new Date(date) < new Date(otherDate)) {
+      return -1;
+    }
+    return 0;
   }
 }
