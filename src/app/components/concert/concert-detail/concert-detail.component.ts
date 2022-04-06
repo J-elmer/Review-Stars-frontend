@@ -26,6 +26,7 @@ export class ConcertDetailComponent implements OnInit {
   addClicked: boolean = false;
   review: Review = {};
   averageStars?: number;
+  hasReviews?: boolean;
 
   constructor(
     private router: Router,
@@ -91,6 +92,7 @@ export class ConcertDetailComponent implements OnInit {
         return;
       }
       this.averageStars = s;
+      this.hasReviews = true;
     });
   }
 

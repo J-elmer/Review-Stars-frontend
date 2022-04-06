@@ -6,7 +6,7 @@
       <div class="hiddendiv" *ngIf="update">
         <input *ngIf="update" type="text" formControlName="id"/>
       </div>
-      <div class="form-control">
+      <div *ngIf="!hasReviews" class="form-control">
         <label>Choose the performer of the concert</label>
         <div *ngIf="submitted && concertForm.controls['performerId'].errors">
           <div class="mat-error">Please select a performer</div>

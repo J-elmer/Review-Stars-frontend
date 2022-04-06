@@ -29,6 +29,7 @@
 </mat-accordion>
 <div *ngIf="updateClicked">
   <app-concert-form-component
+    [hasReviews]="hasReviews"
     [concert]="concert"
     (submitClicked)="saveUpdatedConcert($event)"
     (discardClicked)="discardForm()"

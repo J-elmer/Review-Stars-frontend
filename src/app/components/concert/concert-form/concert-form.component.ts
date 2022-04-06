@@ -17,6 +17,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class ConcertFormComponent implements OnInit {
   @Input() concert!: Concert;
+  @Input() hasReviews?: boolean;
   @Output() submitClicked = new EventEmitter();
   @Output() discardClicked = new EventEmitter();
 
@@ -33,6 +34,8 @@ export class ConcertFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.concert);
+
     this.buildForm();
     if (this.concert.id) {
       this.update = true;
