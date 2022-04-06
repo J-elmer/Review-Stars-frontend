@@ -80,18 +80,17 @@ export class ConcertListComponent implements OnInit {
     this.showsPastConcerts = false;
     this.concertService.getFutureConcerts().subscribe(concerts => {
       if (this.methodsService.hasRoute('/')) {
-        concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!));
         this.concerts = this.sortConcertsByDate(concerts).splice(0, 5);
         return;
       }
-      this.concerts = concerts
+      this.concerts = this.sortConcertsByDate(concerts);
     });
   }
 
   showPastConcerts(): void {
     this.showsPastConcerts = true;
     this.showsFutureConcerts = false;
-    this.concertService.getPastConcerts().subscribe(concerts => this.concerts = concerts);
+    this.concertService.getPastConcerts().subscribe(concerts => this.concerts = this.sortConcertsByDate(concerts));
   }
 
   saveConcert(newConcert: Concert): void {
