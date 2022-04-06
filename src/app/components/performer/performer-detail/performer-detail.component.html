@@ -11,9 +11,9 @@
     <p>Age: {{performer.age}}</p>
     <button class="btn black" routerLink="/reviews/by-performer/{{performer.id}}">Show reviews</button>
     <button class="btn black"  routerLink="/concerts/by-performer/{{performer.id}}">Show Concerts</button>
-    <button *ngIf="hasRoute('/admin')" class="btn green"
+    <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
               (click)="updatePerformer()">Update Performer</button>
-    <i *ngIf="hasRoute('/admin')" (click)="deletePerformer(performer.id!)" class="material-icons">delete</i>
+    <i *ngIf="methodsService.hasRoute('/admin')" (click)="deletePerformer(performer.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="updateClicked">

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -9,6 +9,7 @@ import {Concert} from "../../../model/Concert";
 import {ConcertService} from "../../../services/concert.service";
 import {Review} from "../../../model/Review";
 import {ReviewService} from "../../../services/review.service";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-concert-list',
@@ -26,14 +27,14 @@ export class ConcertListComponent implements OnInit {
   constructor(
     private concertService: ConcertService,
     private reviewService: ReviewService,
-    private router: Router,
+    public methodsService: CommonMethodsService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
-    if (this.hasRoute('/')) {
+    if (this.methodsService.hasRoute('/')) {
       this.showUpcomingConcerts();
     }
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
@@ -56,10 +57,6 @@ export class ConcertListComponent implements OnInit {
     this.addClicked = false;
   }
 
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
-  }
-
   getConcertsByPerformer(id: number): void {
     this.concertService.getConcertsByPerformer(id).subscribe(concerts => {
       this.concerts = concerts
@@ -74,8 +71,8 @@ export class ConcertListComponent implements OnInit {
     this.showsFutureConcerts = true;
     this.showsPastConcerts = false;
     this.concertService.getFutureConcerts().subscribe(concerts => {
-      if (this.hasRoute('/')) {
-        concerts.sort((c1: Concert, c2: Concert) => this.compareTwoDates(c1.day!, c2.day!));
+      if (this.methodsService.hasRoute('/')) {
+        concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!));
         this.concerts = concerts.splice(0, 5);
         return;
       }
@@ -111,7 +108,7 @@ export class ConcertListComponent implements OnInit {
     this.reviewService.createReview(newReview).subscribe((response) => {
       if (!response.status) {
         M.toast({html: `Review by ${newReview.authorName} saved`, classes: 'rounded green'})
-        this.checkWichConcertsToShow();
+        this.checkWhichConcertsToShow();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {
           data: {
@@ -128,7 +125,7 @@ export class ConcertListComponent implements OnInit {
     this.concertService.updateConcert(updatedConcert).subscribe((response) => {
       if (!response) {
         M.toast({html: `Concert on ${updatedConcert.day} updated`, classes: 'rounded green'});
-        this.checkWichConcertsToShow();
+        this.checkWhichConcertsToShow();
       } else {
         this.dialog.open(ConfirmationDialogComponent, {
           data: {
@@ -141,7 +138,7 @@ export class ConcertListComponent implements OnInit {
     });
   }
 
-  checkWichConcertsToShow() {
+  checkWhichConcertsToShow() {
     if (this.showsFutureConcerts) {
       this.showUpcomingConcerts();
     }
@@ -171,25 +168,11 @@ export class ConcertListComponent implements OnInit {
   }
 
   addConcertToList(concert: Concert) {
-    if (this.concertInFuture(concert.day!) && this.showsFutureConcerts) {
+    if (this.methodsService.concertInFuture(concert.day!) && this.showsFutureConcerts) {
       this.concerts.push(concert);
     }
-    if (!this.concertInFuture(concert.day!) && this.showsPastConcerts) {
+    if (!this.methodsService.concertInFuture(concert.day!) && this.showsPastConcerts) {
       this.concerts.push(concert);
     }
-  }
-
-  concertInFuture(day: Date): boolean {
-    return new Date(day) > new Date;
-  }
-
-  compareTwoDates(date: Date, otherDate: Date): number {
-    if (new Date(date) > new Date(otherDate)) {
-      return 1;
-    }
-    if (new Date(date) < new Date(otherDate)) {
-      return -1;
-    }
-    return 0;
   }
 }

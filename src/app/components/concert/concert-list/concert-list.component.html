@@ -1,17 +1,17 @@
 <div class="container">
   <div class="section">
     <div class="row">
-      <div  [hidden]="hasRoute('/')" class="left">
+      <div [hidden]="methodsService.hasRoute('/')" class="left">
         <h2>Concerts</h2>
       </div>
     </div>
-    <div [hidden]="hasRoute('/')" class="row">
+    <div [hidden]="methodsService.hasRoute('/')" class="row">
       <div class="left">
       <button class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
       <button class="btn black" (click)="showPastConcerts()">Show past concerts</button>
       </div>
       <div class="right">
-        <button *ngIf="hasRoute('/admin')" class="btn green"
+        <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
                 (click)="addConcert()">Add Concert
         </button>
       </div>

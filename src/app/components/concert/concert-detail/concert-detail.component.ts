@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 
 import { Concert } from "../../../model/Concert";
@@ -8,6 +7,7 @@ import {Performer} from "../../../model/Performer";
 import { PerformerService} from "../../../services/performer.service";
 import {Review} from "../../../model/Review";
 import {ReviewService} from "../../../services/review.service";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-concert-detail',
@@ -29,15 +29,15 @@ export class ConcertDetailComponent implements OnInit {
   hasReviews?: boolean;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
     private performerService: PerformerService,
     private reviewService: ReviewService,
+    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
     this.getPerformer();
-    if (!this.concertInFuture(this.concert.day!)) {
+    if (!this.methodsService.concertInFuture(this.concert.day!)) {
       this.getAverageStars(this.concert.id!);
     }
   }
@@ -99,13 +99,5 @@ export class ConcertDetailComponent implements OnInit {
   discardForm(): void {
     this.addClicked = false;
     this.updateClicked = false;
-  }
-
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
-  }
-
-  concertInFuture(day: Date): boolean {
-    return new Date(day) > new Date;
   }
 }

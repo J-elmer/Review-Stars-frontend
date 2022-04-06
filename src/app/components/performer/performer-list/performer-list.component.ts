@@ -4,9 +4,10 @@ import * as M from 'materialize-css/dist/js/materialize';
 
 import {Performer} from "../../../model/Performer";
 import {PerformerService} from "../../../services/performer.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-performer-list',
@@ -21,9 +22,9 @@ export class PerformerListComponent implements OnInit {
 
   constructor(
     private performerService: PerformerService,
-    private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
@@ -43,10 +44,6 @@ export class PerformerListComponent implements OnInit {
 
   discardForm(): void {
     this.addClicked = false;
-  }
-
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
   }
 
   getPerformers(): void {

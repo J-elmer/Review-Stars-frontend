@@ -7,7 +7,7 @@
       <mat-panel-description>
         {{concert.day | date: "EEEE, MMMM d, y"}}
       </mat-panel-description>
-      <mat-panel-description *ngIf="averageStars && !concertInFuture(concert.day!)">
+      <mat-panel-description *ngIf="averageStars && !methodsService.concertInFuture(concert.day!)">
         <div *ngIf="averageStars">
           <i *ngFor="let num of [].constructor(averageStars)" class="material-icons star-icons ">stars</i>
         </div>
@@ -19,12 +19,12 @@
     <p>Stage: {{concert.stage}}</p>
     <p>Begin Time: {{concert.beginTime}}</p>
     <p>End Time: {{concert.endTime}}</p>
-    <button *ngIf="!concertInFuture(concert.day!)" class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
+    <button *ngIf="!methodsService.concertInFuture(concert.day!)" class="btn black" routerLink="/reviews/by-concert/{{concert.id}}">Show reviews</button>
     <button *ngIf="performer" class="btn black"  routerLink="/performers/{{performer.id}}">Show Performer</button>
-    <button *ngIf="!concertInFuture(concert.day!)" class="btn green" (click)="addReview()">Add Review</button>
-    <button *ngIf="hasRoute('/admin')" class="btn green"
+    <button *ngIf="!methodsService.concertInFuture(concert.day!)" class="btn green" (click)="addReview()">Add Review</button>
+    <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
             (click)="updateConcert()">Update Concert</button>
-    <i *ngIf="hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
+    <i *ngIf="methodsService.hasRoute('/admin')" (click)="deleteConcert(concert.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="updateClicked">

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 
@@ -8,6 +7,7 @@ import {Concert} from "../../../model/Concert";
 import {Performer} from "../../../model/Performer";
 import {ConcertService} from "../../../services/concert.service";
 import {PerformerService} from "../../../services/performer.service";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-review-detail',
@@ -24,10 +24,10 @@ export class ReviewDetailComponent implements OnInit {
   concert!: Concert;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
     private performerService: PerformerService,
     private concertService: ConcertService,
+    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
@@ -70,9 +70,5 @@ export class ReviewDetailComponent implements OnInit {
 
   discardForm(): void {
     this.updateClicked = false;
-  }
-
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
   }
 }

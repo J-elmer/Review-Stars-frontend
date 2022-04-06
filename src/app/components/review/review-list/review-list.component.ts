@@ -7,6 +7,7 @@ import {ReviewService} from "../../../services/review.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 @Component({
   selector: 'app-review-list',
@@ -23,6 +24,7 @@ export class ReviewListComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
@@ -49,15 +51,11 @@ export class ReviewListComponent implements OnInit {
     this.addClicked = false;
   }
 
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
-  }
-
   getReviews(): void {
     this.redirected = false;
     this.reviewService.getReviews().subscribe(reviews =>  {
       reviews.sort((r1, r2) => this.compareTwoDates(r1.dateOfReview!, r2.dateOfReview!))
-      if (this.hasRoute('/')) {
+      if (this.methodsService.hasRoute('/')) {
         this.reviews = reviews.splice(0, 5);
         return;
       }

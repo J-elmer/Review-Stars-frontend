@@ -14,9 +14,9 @@
     <p>Reviewed on {{review.dateOfReview | date: "EEEE, MMMM d, y"}}</p>
     <button *ngIf="performer" class="btn black" routerLink="/performers/{{performer.id}}">Show Performer</button>
     <button class="btn black"  routerLink="/concerts/by-concert/{{concert.id}}">Show Concert</button>
-    <button *ngIf="hasRoute('/admin')" class="btn green"
+    <button *ngIf="methodsService.hasRoute('/admin')" class="btn green"
             (click)="updateReview()">Update Review</button>
-    <i *ngIf="hasRoute('/admin')" (click)="deleteReview(review.id!)" class="material-icons">delete</i>
+    <i *ngIf="methodsService.hasRoute('/admin')" (click)="deleteReview(review.id!)" class="material-icons">delete</i>
   </mat-expansion-panel>
 </mat-accordion>
 <div *ngIf="updateClicked && review">

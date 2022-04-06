@@ -1,9 +1,9 @@
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
-import { Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 
 import { Performer } from "../../../model/Performer";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
+import {CommonMethodsService} from "../../../services/common-methods.service";
 
 
 @Component({
@@ -19,8 +19,8 @@ export class PerformerDetailComponent implements OnInit {
   updateClicked: boolean = false;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
+    public methodsService: CommonMethodsService,
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +51,5 @@ export class PerformerDetailComponent implements OnInit {
 
   discardForm(): void {
     this.updateClicked = false;
-  }
-
-  hasRoute(route: string): boolean {
-    return this.router.url === route;
   }
 }
