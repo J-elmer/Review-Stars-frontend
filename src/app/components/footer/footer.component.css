@@ -4,6 +4,15 @@
   margin-top: 0.25rem;
 }
 
-.page-footer {
+.footer {
   background-color: black;
+}
+
+.footer-text {
+  color: white;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 0;
 }

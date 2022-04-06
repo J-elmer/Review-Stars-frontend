@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; min-height: 100%;}
 #toast-container {
   top: auto !important;
   right: auto !important;
@@ -34,5 +34,14 @@ i {
 
 .italics {
   font-style: italic;
+}
+
+body > app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%}
+
+main {
+  flex: 1 0 auto;
 }
 
