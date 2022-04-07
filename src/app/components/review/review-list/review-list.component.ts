@@ -74,7 +74,7 @@ export class ReviewListComponent implements OnInit {
   getReviews(): void {
     this.redirected = false;
     this.reviewService.getReviews().subscribe(reviews =>  {
-      reviews.sort((r1, r2) => this.compareTwoDates(r1.dateOfReview!, r2.dateOfReview!))
+      reviews.sort((r1, r2) => this.compareTwoDates(r2.dateOfReview!, r1.dateOfReview!))
       if (this.methodsService.hasRoute('/')) {
         this.reviews = reviews.splice(0, 5);
         return;
