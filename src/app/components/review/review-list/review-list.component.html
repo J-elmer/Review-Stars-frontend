@@ -1,9 +1,17 @@
 <div class="container">
   <div class="section">
-    <div [hidden]="displayedOnHomePage" class="row">
+    <div *ngIf="!displayedOnHomePage && !searched" class="row">
       <div class="left">
         <h2>Reviews</h2>
       </div>
+    </div>
+    <div *ngIf="searched" class="row">
+      <div class="left">
+        <h2>Search results</h2>
+      </div>
+    </div>
+    <div *ngIf="!displayedOnHomePage && !redirected && !searched" class="row">
+      <app-review-search></app-review-search>
     </div>
     <div *ngIf="redirected" class="row">
       <div class="left">

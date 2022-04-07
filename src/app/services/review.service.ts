@@ -89,6 +89,13 @@ export class ReviewService {
     );
   }
 
+  searchReviews(term: string): Observable<Review[]> {
+    const url = `${this.reviewUrl}search?term=${term}`;
+    return this.http.get<Review[]>(url).pipe(
+      catchError(this.handleError<Review[]>('searchReviews'))
+    );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

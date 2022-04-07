@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
@@ -15,11 +15,13 @@ import {CommonMethodsService} from "../../../services/common-methods.service";
   styleUrls: ['./review-list.component.css']
 })
 export class ReviewListComponent implements OnInit {
+  @Input() searchResult: Review[] = [];
   reviews: Review[] = [];
   addClicked: boolean = false;
   redirected: boolean = false;
   admin: boolean = false;
   displayedOnHomePage: boolean = false;
+  searched: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
@@ -38,6 +40,12 @@ export class ReviewListComponent implements OnInit {
     }
     if (this.methodsService.hasRoute('/admin')) {
       this.admin = true;
+    }
+
+    if (this.searchResult.length > 0){
+      this.reviews = this.searchResult;
+      this.searched = true;
+      return;
     }
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
