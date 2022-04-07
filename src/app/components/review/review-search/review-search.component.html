@@ -1,5 +1,5 @@
 <div id="search-component">
-  <label for="search-box">Search review texts</label>
+  <label for="search-box">Search reviews content</label>
   <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
   <button class="btn modal-trigger black" *ngIf="searchResult.length > 0" data-target="modal">Show search results</button>
   <p *ngIf="searchFinished && searchResult.length === 0">No results </p>

@@ -4,7 +4,7 @@
       <div class="left">
         <h2>Reviews</h2>
       </div>
-      <div class="right">
+      <div *ngIf="reviews.length > 0" class="right">
         <button class="btn black" [ngModel]="sortClicked" (click)="sortByStars()">Sort by stars</button>
       </div>
     </div>
