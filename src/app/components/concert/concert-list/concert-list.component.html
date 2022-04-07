@@ -11,7 +11,7 @@
         <button *ngIf="!redirected" class="btn black" (click)="showPastConcerts()">Show past concerts</button>
         <button *ngIf="redirected" class="btn black" (click)="showUpcomingConcerts()">Show all upcoming concerts</button>
         <button *ngIf="redirected" class="btn black" (click)="showPastConcerts()">Show all past concerts</button>
-        <button *ngIf="concerts.length > 0" class="btn black" (click)="userSortConcerts()">Sort concerts by date</button>
+        <button *ngIf="concerts.length > 1" class="btn black" (click)="userSortConcerts()">Sort concerts by date</button>
       </div>
       <div class="right">
         <button *ngIf="admin" class="btn green"
@@ -36,7 +36,7 @@
         </app-concert-detail>
       </div>
     </div>
-    <div *ngIf="concerts.length === 0 && redirected">
+    <div *ngIf="(showsPastConcerts || showsFutureConcerts) && concerts.length === 0">
       No concerts found.
     </div>
   </div>

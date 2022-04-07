@@ -15,7 +15,7 @@
         <h2>Search results</h2>
       </div>
     </div>
-    <div *ngIf="!redirected && !searched && !admin" class="row">
+    <div *ngIf="!redirected && !searched && !admin && performers.length > 0" class="row">
       <app-performer-search></app-performer-search>
     </div>
     <div *ngIf="redirected"  class="row">
@@ -36,6 +36,9 @@
         [performer]="performer"
         [admin]="admin"
       ></app-performer-detail>
+    </div>
+    <div *ngIf="performers.length ===0">
+      No performers found
     </div>
   </div>
 </div>
