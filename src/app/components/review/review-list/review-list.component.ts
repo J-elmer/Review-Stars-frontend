@@ -22,6 +22,7 @@ export class ReviewListComponent implements OnInit {
   admin: boolean = false;
   displayedOnHomePage: boolean = false;
   searched: boolean = false;
+  sortClicked: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
@@ -122,6 +123,16 @@ export class ReviewListComponent implements OnInit {
           }});
       }
     })
+  }
+
+  sortByStars() {
+    if (!this.sortClicked) {
+      this.reviews = this.reviews.sort((r1, r2) => r2.numberOfStars! - r1.numberOfStars!);
+      this.sortClicked = true;
+      return;
+    }
+    this.reviews = this.reviews.sort((r1, r2) => r1.numberOfStars! - r2.numberOfStars!);
+    this.sortClicked = false;
   }
 
   compareTwoDates(date: Date, otherDate: Date): number {

@@ -4,6 +4,9 @@
       <div class="left">
         <h2>Reviews</h2>
       </div>
+      <div class="right">
+        <button class="btn black" [ngModel]="sortClicked" (click)="sortByStars()">Sort by stars</button>
+      </div>
     </div>
     <div *ngIf="searched" class="row">
       <div class="left">
