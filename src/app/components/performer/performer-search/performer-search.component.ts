@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, Observable, Subject, switchMap} from "rxjs";
-import {Review} from "../../../model/Review";
-import {ReviewService} from "../../../services/review.service";
+import {Performer} from "../../../model/Performer";
+import {PerformerService} from "../../../services/performer.service";
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
 @Component({
-  selector: 'app-review-search',
-  templateUrl: './review-search.component.html',
-  styleUrls: ['./review-search.component.css']
+  selector: 'app-performer-search',
+  templateUrl: './performer-search.component.html',
+  styleUrls: ['./performer-search.component.css']
 })
-export class ReviewSearchComponent implements OnInit {
-  reviews$!: Observable<Review[]>;
-  searchResult: Review[] = [];
+export class PerformerSearchComponent implements OnInit {
+  performers$!: Observable<Performer[]>;
+  searchResult: Performer[] = [];
   searchFinished: boolean = false;
 
   private searchTerms = new Subject<string>();
 
   constructor(
-    private reviewService: ReviewService,
+    private performerService: PerformerService,
   ) { }
 
   ngOnInit(): void {
-    this.reviews$ = this.searchTerms.pipe(
+    this.performers$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.reviewService.searchReviews(term))
+      switchMap((term: string) => this.performerService.getPerformerByName(term))
     )
-    this.reviews$.subscribe(reviews => {
-      this.searchResult = reviews;
+    this.performers$.subscribe(performers => {
+      this.searchResult = performers;
       this.searchFinished = true;
     });
     let element = document.querySelectorAll(".modal");

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="section">
-    <div class="row">
+    <div *ngIf="!searched" class="row">
       <div class="left">
         <h2>Performers</h2>
       </div>
@@ -9,6 +9,14 @@
                 (click)="addPerformer()">Add performer
         </button>
       </div>
+    </div>
+    <div *ngIf="searched" class="row">
+      <div class="left">
+        <h2>Search results</h2>
+      </div>
+    </div>
+    <div *ngIf="!redirected && !searched && !admin" class="row">
+      <app-performer-search></app-performer-search>
     </div>
     <div *ngIf="redirected"  class="row">
       <div class="left">

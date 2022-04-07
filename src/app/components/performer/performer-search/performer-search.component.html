@@ -1,10 +1,10 @@
 <div id="search-component">
-  <label for="search-box">Search reviews content</label>
+  <label for="search-box">Search performers by name</label>
   <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
   <button class="btn modal-trigger black" *ngIf="searchResult.length > 0" data-target="modal">Show search results</button>
 </div>
 <div id="modal" class="modal">
   <div class="modal-content">
-    <app-review-list *ngIf="searchResult.length > 0" [searchResult]="searchResult"></app-review-list>
+    <app-performer-list *ngIf="searchResult.length > 0" [searchResult]="searchResult"></app-performer-list>
   </div>
 </div>

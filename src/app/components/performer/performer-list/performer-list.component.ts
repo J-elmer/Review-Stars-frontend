@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 // @ts-ignore
 import * as M from 'materialize-css/dist/js/materialize';
 
@@ -15,11 +15,13 @@ import {CommonMethodsService} from "../../../services/common-methods.service";
   styleUrls: ['./performer-list.component.css']
 })
 export class PerformerListComponent implements OnInit {
+  @Input() searchResult: Performer[] = [];
   performers: Performer[] = [];
   addClicked: boolean = false;
   performer: Performer = {};
   redirected: boolean = false;
   admin: boolean = false;
+  searched: boolean = false;
 
   constructor(
     private performerService: PerformerService,
@@ -29,13 +31,33 @@ export class PerformerListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = Number((this.route.snapshot.paramMap.get('id')));
+    this.checkRouteUser();
+    this.checkSearchResults();
+    if (this.searched) {
+      return;
+    }
+    this.checkRouteParams();
+  }
+
+  checkRouteUser(): void {
     if (this.methodsService.redirectedFromAdmin(this.route)) {
       this.admin = true;
     }
     if (this.methodsService.hasRoute('/admin')) {
       this.admin = true;
     }
+  }
+
+  checkSearchResults(): void {
+    if (this.searchResult.length > 0){
+      this.performers = [];
+      this.performers = this.searchResult;
+      this.searched = true;
+    }
+  }
+
+  checkRouteParams(): void {
+    const id = Number((this.route.snapshot.paramMap.get('id')));
     if (id) {
       this.redirected = true;
       this.getPerformer(id);

@@ -33,6 +33,15 @@ export class ReviewListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkRouteUser();
+    this.checkSearchResults();
+    if (this.searched) {
+      return;
+    }
+    this.checkRouteParams();
+  }
+
+  checkRouteUser(): void {
     if (this.methodsService.hasRoute('/')) {
       this.displayedOnHomePage = true;
     }
@@ -42,12 +51,16 @@ export class ReviewListComponent implements OnInit {
     if (this.methodsService.hasRoute('/admin')) {
       this.admin = true;
     }
+  }
 
+  checkSearchResults(): void {
     if (this.searchResult.length > 0){
       this.reviews = this.searchResult;
       this.searched = true;
-      return;
     }
+  }
+
+  checkRouteParams(): void {
     const concertId = Number((this.route.snapshot.paramMap.get('concert-id')));
     const performerId = Number((this.route.snapshot.paramMap.get('performer-id')));
     if (concertId) {

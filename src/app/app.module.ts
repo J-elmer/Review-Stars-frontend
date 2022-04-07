@@ -25,6 +25,7 @@ import { ReviewFormComponent } from './components/review/review-form/review-form
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReviewSearchComponent } from './components/review/review-search/review-search.component';
+import { PerformerSearchComponent } from './components/performer/performer-search/performer-search.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ReviewSearchComponent } from './components/review/review-search/review-
     HomeComponent,
     FooterComponent,
     ReviewSearchComponent,
+    PerformerSearchComponent,
   ],
   imports: [
     BrowserModule,
