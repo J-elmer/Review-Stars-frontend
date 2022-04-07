@@ -25,6 +25,7 @@ export class ConcertListComponent implements OnInit {
   showsFutureConcerts: boolean = false
   admin: boolean = false;
   displayedOnHomePage = false;
+  sortClicked = false;
 
   constructor(
     private concertService: ConcertService,
@@ -184,7 +185,17 @@ export class ConcertListComponent implements OnInit {
   }
 
   sortConcertsByDate(concerts: Concert[]): Concert[] {
-    concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!))
+    if (this.showsFutureConcerts) {
+      concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c1.day!, c2.day!))
+    }
+    if (this.showsPastConcerts) {
+      concerts.sort((c1: Concert, c2: Concert) => this.methodsService.compareTwoDates(c2.day!, c1.day!))
+    }
     return concerts;
   }
+
+  userSortConcerts() {
+    this.concerts.reverse();
+  }
 }
+

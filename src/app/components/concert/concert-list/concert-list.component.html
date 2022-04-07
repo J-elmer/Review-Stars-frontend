@@ -9,9 +9,9 @@
       <div class="left">
         <button *ngIf="!redirected" class="btn black" (click)="showUpcomingConcerts()">Show upcoming concerts</button>
         <button *ngIf="!redirected" class="btn black" (click)="showPastConcerts()">Show past concerts</button>
-        <button *ngIf="redirected" class="btn black" (click)="showUpcomingConcerts()">Show all upcoming concerts
-        </button>
+        <button *ngIf="redirected" class="btn black" (click)="showUpcomingConcerts()">Show all upcoming concerts</button>
         <button *ngIf="redirected" class="btn black" (click)="showPastConcerts()">Show all past concerts</button>
+        <button *ngIf="concerts.length > 0" class="btn black" (click)="userSortConcerts()">Sort concerts by date</button>
       </div>
       <div class="right">
         <button *ngIf="admin" class="btn green"
