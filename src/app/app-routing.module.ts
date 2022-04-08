@@ -25,8 +25,9 @@ const routes: Routes = [
   { path: 'reviews/by-performer/:performer-id', component: ReviewListComponent },
   { path: 'reviews/admin/by-performer/:performer-id', component: ReviewListComponent },
   { path: 'admin', component: AdminPageComponent},
-  { path: '**', component: NotFoundComponent},
+  { path: '**', pathMatch: 'full', component: NotFoundComponent},
 ]
+
 @NgModule({
   declarations: [],
   imports: [
