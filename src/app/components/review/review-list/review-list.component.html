@@ -1,5 +1,6 @@
 <div class="container">
   <div class="section">
+    <h1 *ngIf="displayedOnHomePage && reviews.length > 0" class="center">Most recent reviews</h1>
     <div *ngIf="!displayedOnHomePage && !searched" class="row">
       <div class="left">
         <h2>Reviews</h2>
@@ -29,7 +30,7 @@
         [admin]="admin">
       </app-review-detail>
     </div>
-    <div *ngIf="reviews.length === 0">
+    <div *ngIf="reviews.length === 0 && !displayedOnHomePage">
       No reviews found.
     </div>
   </div>

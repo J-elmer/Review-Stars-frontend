@@ -1,5 +1,6 @@
 <div class="container">
   <div class="section">
+    <h1 *ngIf="displayedOnHomePage && concerts.length > 0" class="center">Upcoming Concerts</h1>
     <div class="row">
       <div [hidden]="displayedOnHomePage" class="left">
         <h2>Concerts</h2>
@@ -36,7 +37,7 @@
         </app-concert-detail>
       </div>
     </div>
-    <div *ngIf="(showsPastConcerts || showsFutureConcerts) && concerts.length === 0">
+    <div *ngIf="(showsPastConcerts || showsFutureConcerts) && concerts.length === 0 && !displayedOnHomePage">
       No concerts found.
     </div>
   </div>
