@@ -17,8 +17,8 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>Stage: {{concert.stage}}</p>
-    <p>Begin Time: {{concert.beginTime}}</p>
-    <p>End Time: {{concert.endTime}}</p>
+    <p>Begin Time: {{concert.beginTime! | toTwelveHoursBase}}</p>
+    <p>End Time: {{concert.endTime! | toTwelveHoursBase}}</p>
     <button *ngIf="!concertIsInFuture && !admin" class="btn black"
             routerLink="/reviews/by-concert/{{concert.id}}">Show reviews
     </button>

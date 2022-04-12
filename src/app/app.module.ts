@@ -26,6 +26,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReviewSearchComponent } from './components/review/review-search/review-search.component';
 import { PerformerSearchComponent } from './components/performer/performer-search/performer-search.component';
+import { ToTwelveHoursBasePipe } from './pipes/to-twelve-hours-base.pipe';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PerformerSearchComponent } from './components/performer/performer-searc
     FooterComponent,
     ReviewSearchComponent,
     PerformerSearchComponent,
+    ToTwelveHoursBasePipe,
   ],
   imports: [
     BrowserModule,
