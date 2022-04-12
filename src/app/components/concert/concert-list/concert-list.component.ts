@@ -160,7 +160,7 @@ export class ConcertListComponent implements OnInit {
       if (!response) {
         let concert = this.concerts.find(c => c.id == concertId);
         if (concert) {
-          M.toast({html: `Concert on ${concert.day} deleted`, classes: 'rounded red'})
+          M.toast({html: `Concert on ${concert.day} deleted`, classes: 'rounded green'})
         }
         this.concerts = this.concerts.filter(c => c.id !== concertId);
       } else {

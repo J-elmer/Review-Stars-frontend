@@ -123,7 +123,7 @@ export class PerformerListComponent implements OnInit {
         let performer = this.performers.find(p => p.id == performerId);
         if (!response) {
           if (performer) {
-            M.toast({html: `Performer ${performer.name} deleted`, classes: 'rounded red'})
+            M.toast({html: `Performer ${performer.name} deleted`, classes: 'rounded green'})
           }
           this.performers = this.performers.filter(p => p.id !== performerId);
         } else {

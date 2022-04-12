@@ -125,7 +125,7 @@ export class ReviewListComponent implements OnInit {
       if (!response) {
         let review = this.reviews.find(r => r.id == reviewId);
         if (review) {
-          M.toast({html: `Review by ${review.authorName} deleted`, classes: 'rounded red'})
+          M.toast({html: `Review by ${review.authorName} deleted`, classes: 'rounded green'})
         }
         this.reviews = this.reviews.filter(r => r.id !== reviewId);
       } else {
