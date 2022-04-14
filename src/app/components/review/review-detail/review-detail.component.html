@@ -11,6 +11,7 @@
     <p>Review: <span class="italics">{{review.reviewText}}</span></p>
     <p>Reviewed by {{review.authorName}}</p>
     <p>Concert performed on {{concert.day | date: "EEEE, MMMM d, y"}}</p>
+    <p>Concert stage: {{concert.stage}}</p>
     <p>Reviewed on {{review.dateOfReview | date: "EEEE, MMMM d, y"}}</p>
     <button *ngIf="performer && !admin" class="btn black" routerLink="/performers/{{performer.id}}">Show Performer</button>
     <button *ngIf="performer && admin" class="btn black" routerLink="/performers/admin/{{performer.id}}">Show Performer</button>
