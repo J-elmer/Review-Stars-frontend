@@ -14,9 +14,9 @@
         <h2>Search results</h2>
       </div>
     </div>
-    <div *ngIf="!displayedOnHomePage && !redirected && !searched && !admin && reviews.length > 0" class="row">
-      <app-review-search></app-review-search>
-    </div>
+<!--    <div *ngIf="!displayedOnHomePage && !redirected && !searched && !admin && reviews.length > 0" class="row">-->
+<!--      <app-review-search></app-review-search>-->
+<!--    </div>-->
     <div *ngIf="redirected" class="row">
       <div class="left">
         <button class="btn black" (click)="getReviews()">Show all reviews</button>
