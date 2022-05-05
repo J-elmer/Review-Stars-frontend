@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError } from "rxjs";
 
 import { Performer } from "../model/Performer";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerformerService {
-  private performerUrl = 'http://localhost:6060/performer/'
+  private performerUrl = environment.performerApi;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

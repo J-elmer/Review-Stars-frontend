@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError } from "rxjs";
 
 import { Concert } from "../model/Concert";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConcertService {
-  private concertUrl = 'http://localhost:9090/concert/';
+  private concertUrl = environment.concertApi;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

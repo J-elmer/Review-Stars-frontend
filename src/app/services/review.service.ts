@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError } from "rxjs";
 
 import { Review } from "../model/Review";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
-  private reviewUrl = 'http://localhost:7070/review/'
+  private reviewUrl = environment.reviewApi;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
