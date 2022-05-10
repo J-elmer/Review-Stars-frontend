@@ -8,6 +8,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 **Important Note**
 
-Make sure you run the performer, concert and review microservices if you want the full functionality. Otherwise, you want be able to create, read, update or delete performers/concerts/reviews.
+Make sure you run the [performer](https://github.com/J-elmer/Performer-Microservice), [concert](https://github.com/J-elmer/Concert-microservice) and [review](https://github.com/J-elmer/Review-microservice) microservices if you want the full functionality. Otherwise, you want be able to create, read, update or delete performers/concerts/reviews.
 
 If you want to run the app in production, I suggest you check out the [ReviewStars Repository](https://github.com/J-elmer/ReviewStars). Here you can build the whole ReviewStars application in one go.
